@@ -7,11 +7,13 @@
     <meta charset="ISO-8859-1">
     <title>Cart Page</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
     <style>
         /* Advanced Styling for Cart Page */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0d92e4, #a70dc6);
+            background-color: #c3d5d5;
             margin: 0;
             padding: 0;
         }
@@ -21,156 +23,196 @@
             margin: auto;
         }
 
-        .card-sh {
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
+/* Card Styles */
+.card-sh {
+    background-color: #fefefe; /* Soft white for a cleaner look */
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Elevation for a modern look */
+    overflow: hidden;
+    border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-        .card-header {
-            background: #343a40;
-            color: #fff;
-            padding: 1.5rem;
-            border-radius: 15px 15px 0 0;
-        }
+.card-sh:hover {
+    transform: translateY(-8px); /* Subtle lift on hover */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); /* Deepened shadow on hover */
+}
 
-        .card-header p {
-            margin: 0;
-            font-size: 1.8rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
+.card-header {
+    background: linear-gradient(135deg, #4a90e2, #007bff); /* Modern gradient */
+    color: #fff;
+    padding: 2rem;
+    border-radius: 16px 16px 0 0;
+    text-align: center;
+}
 
-        .card-body {
-            padding: 2rem;
-        }
+.card-header p {
+    margin: 0;
+    font-size: 1.85rem;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+}
 
-        .table {
-            width: 100%;
-            background-color: #fff;
-            border-radius: 10px;
-            overflow: hidden;
-        }
+.card-body {
+    padding: 2rem;
+    background-color: #fafafa; /* Softer background */
+}
 
-        th, td {
-            padding: 1.5rem;
-            text-align: center;
-            border-top: 1px solid #e9ecef;
-        }
+/* Table Styles */
+.table {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #fff;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
 
-        .table th {
-            background-color: #999;
-            color: white;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
+th, td {
+    padding: 1.5rem;
+    text-align: center;
+    background-color: #f2f4f6; /* Updated light background */
+}
 
-        .table td {
-            vertical-align: middle;
-            font-size: 1rem;
-            color: #6c757d;
-        }
+.table th {
+    background-color: #476b6b;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border: none;
+}
 
-        .table img {
-            border-radius: 10px;
-        }
+.table td {
+    vertical-align: middle;
+    font-size: 1.1rem;
+    color: #333;
+    transition: background-color 0.3s ease;
+}
 
-        .text-center {
-            text-align: center;
-        }
+.table tr:hover td {
+    background-color: #eef0f5; /* Subtle hover effect on rows */
+}
 
-        /* Button Styles */
-        .btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 50px;
-            text-decoration: none;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            background-image: linear-gradient(135deg, #0dc613, #0a8c47);
-            transition: background 0.3s ease;
-        }
+.table img {
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Stronger depth for images */
+    width: 75px;
+    height: 75px;
+}
 
-        .btn:hover {
-            background-image: linear-gradient(135deg, #09d238, #12824a);
-        }
+/* Button Styles */
+.btn {
+    padding: 12px 24px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+    border: none;
+    font-weight: 600;
+}
 
-        .btn-warning {
-            background-color: #3385ff;
-            color: black;
-        }
+.btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px); /* Lift effect on hover */
+}
 
-        .btn-warning:hover {
-            background-color: #ffcd39;
-            color: white;
-        }
+.btn-warning {
+    background-color: #699696;
+    color: #fff;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
 
-        .btn i {
-            margin: 0 5px;
-        }
+.btn-warning:hover {
+    background-color: #699696;
+    transform: translateY(-3px);
+}
 
-        .fw-bold {
-            font-weight: 700;
-        }
+.btn i {
+    margin-right: 6px;
+}
 
-        /* Message styles */
-        .text-success {
-            color: #28a745;
-            font-weight: bold;
-        }
+/* Typography */
+.fw-bold {
+    font-weight: 700;
+}
 
-        .text-danger {
-            color: #dc3545;
-            font-weight: bold;
-        }
+/* Message Styles */
+.text-success {
+    color: #28a745;
+    font-weight: bold;
+}
 
-        /* Responsive table for smaller devices */
-        @media (max-width: 768px) {
-            .table thead {
-                display: none;
-            }
+.text-danger {
+    color: #dc3545;
+    font-weight: bold;
+}
 
-            .table tr {
-                display: block;
-                margin-bottom: 1rem;
-                border: 1px solid #dee2e6;
-            }
+/* Responsive Table */
+@media (max-width: 768px) {
+    .table thead {
+        display: none;
+    }
 
-            .table td {
-                display: block;
-                text-align: right;
-                padding: 0.75rem;
-                position: relative;
-            }
+    .table tr {
+        display: block;
+        margin-bottom: 1rem;
+        border: 1px solid #dee2e6;
+        padding: 1.25rem;
+    }
 
-            .table td:before {
-                content: attr(data-label);
-                position: absolute;
-                left: 0;
-                top: 0;
-                background-color: #007bff;
-                color: white;
-                padding: 0.75rem;
-                font-weight: bold;
-                border-right: 1px solid #dee2e6;
-                width: 150px;
-                text-align: left;
-            }
-        }
+    .table td {
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem;
+        position: relative;
+    }
+
+    .table td:before {
+        content: attr(data-label);
+        background-color: #4a90e2;
+        color: white;
+        font-weight: bold;
+        padding: 0.75rem;
+        border-right: 1px solid #dee2e6;
+        width: 160px;
+        text-align: left;
+        display: inline-block;
+    }
+
+    .btn-warning {
+        width: 100%; /* Full width buttons */
+        margin-top: 1rem;
+    }
+}
+
+/* Hover Effects for Interactivity */
+.card-header p:hover {
+    letter-spacing: 0.8px;
+    transition: letter-spacing 0.3s ease;
+}
+
+.table td:hover {
+    color: #007bff; /* Accent color for hover */
+}
+
     </style>
 </head>
 <body>
     <section>
+         <div class="mt-16 image-container relative">
+            <img src="https://res.cloudinary.com/dbleggv6z/image/upload/v1728223258/RevShop/b2_qnmjba.jpg" alt="Summer Collection" class="w-full h-44 md:h-48 object-cover">
+            <div class="heading-overlay absolute inset-0 flex flex-col justify-center items-center text-white">
+                <h2 class="text-white text-3xl md:text-4xl font-bold">Cart Items</h2>
+                <p class="text-white text-lg md:text-xl">Manage Cart Items</p>
+            </div>
+        </div>
         <div class="container-fluid mt-5 p-5">
             <div class="card card-sh">
-                <div class="card-header text-center">
-                    <p class="fs-4">Cart Page</p>
-
-                    
-                </div>
-
                 <div class="card-body">
                     <table class="table">
                         <thead>

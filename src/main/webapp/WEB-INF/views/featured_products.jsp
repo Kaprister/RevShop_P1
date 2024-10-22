@@ -59,11 +59,12 @@
                     <div class="des">
                         <%-- <span>${product.brand}</span> --%>
                         <h5>${product.title}</h5>
-                        <h4>$${product.price}</h4>
+                        <h4>₹${product.price}</h4>
                     </div>
                     <div class="flex justify-between pb-2">
                         <a href="${pageContext.request.contextPath}/user/addCart?pid=${product.id}&uid=${user.id}"
-                        class="px-4 py-1 bg-blue-900 text-white rounded-md hover:bg-blue-600 transition duration-300">Add to Cart</a>
+                        class="px-4 py-1 bg-blue-900 text-white rounded-md hover:bg-blue-600 transition duration-300"
+                        style="text-decoration: none;">Add to Cart</a>
 
                         <c:if test="${product.stock > 0}">
                             <form action="${pageContext.request.contextPath}/user/cart" method="get" class="inline">

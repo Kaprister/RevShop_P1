@@ -30,7 +30,7 @@ public class MailHelper {
 		MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message);
 
-		helper.setFrom("shubhamtingare0661@gmail.com", "RevMart");
+		helper.setFrom("sushant622hitit2020@gmail.com", "RevShop");
 		helper.setTo(reciepentEmail);
 
 		String content = "<div style='font-family: Arial, sans-serif; color: #333;'>"

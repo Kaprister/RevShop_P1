@@ -245,7 +245,7 @@ public class Controller_Home {
 	        }
 	    }
 
-	    return "redirect:/register";
+	    return "redirect:/signin";
 	}
 
     @GetMapping("/forgot-password")
