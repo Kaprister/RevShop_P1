@@ -11,23 +11,33 @@
     <!-- Internal CSS -->
     <style>
         body {
-            padding-top: 56px; 
+            padding-top: 56px;
         }
-        
+
         /* Navbar styles */
         .navbar {
-            background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c); /* Black background */
+            background-color: rgb(232, 225, 225);
         }
         .navbar-nav .nav-link {
-            color: #fff !important; /* White text color */
-            
+            color: black !important; /* White text color */
+
         }
-        .navbar-nav .nav-link.active, 
+        .navbar-nav .nav-link.active,
         .navbar-nav .nav-link:hover {
-            color: #ddd !important; /* Lighter gray for hover/active state */
+            color: rgb(64 64 64);!important; /* Lighter gray for hover/active state */
+        }
+        .navbar .nav-link.btn {
+            font-weight: bold; /* Make button text bold */
+            padding: 10px 15px; /* Increase padding for better appearance */
+            border-radius: 5px; /* Round the corners */
         }
         .navbar-brand {
-            color: #fff !important; /* White text color for brand */
+            color: black !important; /* White text color for brand */
+        }
+        .navbar-brand-img {
+            max-width: 80px; /* Adjust the size of the logo */
+            width: 100%; /* Ensures the image is responsive */
+            border-radius:8px;
         }
         .navbar-toggler-icon {
             background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"%3E%3Cpath stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /%3E%3C/svg%3E');
@@ -41,7 +51,7 @@
         .dropdown-item:hover {
             background-color: #555; /* Lighter gray for hover effect */
         }
-       
+
         .cart-count {
             position: relative;
             top: -35px;
@@ -57,14 +67,16 @@
             justify-content: center;
             font-size: 7px;
         }
-        
+
     </style>
 </head>
 <body>
     <!-- Start Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"> RevMart</a>
+            <div class="navbar-brand">
+                <img class="navbar-brand-img" src="https://res.cloudinary.com/dbleggv6z/image/upload/v1728288009/RevShop/rev-logo_szdwim.png" alt="logo"/>
+            </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -81,23 +93,30 @@
                             </c:if>
                             <c:if test="${user.role == 'ROLE_USER'}">
                                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="/"></i> Home</a></li>
-                                                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="/user/wishlist"><i class="fa-solid fa-heart"></i> Wishlist</a></li>
-                                
+                                 <li><a class="nav-link active" aria-current="page" href="/shop">Shop</a></li>
+                                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="/featured-products"></i>featured-products</a></li>
+                                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="/user/user-orders"></i>Orders</a></li>
+                                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/user/wishlist"><i class="fa-solid fa-heart"></i> Wishlist</a></li>
+
                             </c:if>
                         </c:otherwise>
                     </c:choose>
 
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="/products">Product</a></li>
-                  
 
-              
+
+
                 </ul>
 
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <c:choose>
                         <c:when test="${empty user}">
-                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="/signin"></i> LOGIN</a></li>
-                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="/register">REGISTER</a></li>
+                            <li class="nav-item">
+                                <a class=" btn btn-primary me-2" href="/signin">LOGIN</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class=" btn btn-primary me-2" href="/register">REGISTER</a>
+                            </li>
                         </c:when>
                         <c:otherwise>
                             <c:if test="${user.role == 'ROLE_USER'}">
@@ -108,7 +127,7 @@
                             </c:if>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa-solid fa-user"></i> 
+                                    <i class="fa-solid fa-user"></i>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <c:if test="${user.role == 'ROLE_USER'}">
@@ -136,10 +155,13 @@
     </div>
 
     <!-- Start Footer -->
-  
+
     <!-- End Footer -->
 
     <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Link to external JavaScript file -->
+    <script src="${pageContext.request.contextPath}/static/js/header.js"></script>
 </body>
 </html>

@@ -243,7 +243,7 @@
 
         const totalOrderPrice = ${totalOrderPrice};  // Ensure this is a valid number
         const options = {
-            "key": "rzp_test_zT6nDcxOnaNc2W",  // Replace with your Razorpay Key ID
+            "key": "rzp_test_kOZuSgBkSmpz5o",  // Replace with your Razorpay Key ID
             "amount": totalOrderPrice * 100,  // Razorpay accepts amount in paise (multiply by 100)
             "currency": "INR",
             "name": "E-Commerce Website",

@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class RevMart1Application {
 
 	public static void main(String[] args) {
-		
+
 		SpringApplication.run(RevMart1Application.class, args);
 	}
 

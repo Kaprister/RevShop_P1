@@ -127,6 +127,8 @@ public class Controller_User {
 		m.addAttribute("categorys", allActiveCategory);
 	}
 
+
+
 	@GetMapping("/addCart")
 	public String addToCart(@RequestParam Integer pid, @RequestParam Integer uid, HttpSession session) {
 		Cart saveCart = cartService.saveCart(pid, uid);

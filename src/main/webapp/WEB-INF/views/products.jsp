@@ -245,6 +245,8 @@
             </div>
         </div>
     </section>
+
+
     <script>
     // Fade out and hide the alert messages after 2 seconds
     setTimeout(function() {

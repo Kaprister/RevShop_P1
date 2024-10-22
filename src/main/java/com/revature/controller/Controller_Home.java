@@ -95,6 +95,26 @@ public class Controller_Home {
         return "userHome";
     }
 
+    @GetMapping("/shop")
+    public String showShop(Model m) {
+        // Add products to the model
+        List<Product> allActiveProducts = productService.getAllActiveProducts("").stream()
+                .sorted((p1, p2) -> p2.getId().compareTo(p1.getId()))
+                .limit(8).toList();
+        m.addAttribute("products", allActiveProducts);
+        return "shop"; // This will resolve to /WEB-INF/views/shop.jsp
+    }
+
+    @GetMapping("/featured-products")
+    public String showFeatured(Model m) {
+        // Add products to the model
+        List<Product> allActiveProducts = productService.getAllActiveProducts("").stream()
+                .sorted((p1, p2) -> p2.getId().compareTo(p1.getId()))
+                .limit(8).toList();
+        m.addAttribute("products", allActiveProducts);
+        return "featured_products"; // This will resolve to /WEB-INF/views/shop.jsp
+    }
+
     @GetMapping("/signin")
     public String login() {
         return "login"; 

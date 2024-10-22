@@ -11,8 +11,8 @@ public class AppConfig {
  public RestTemplate restTemplate() {
  return new RestTemplate();
  }
-public ResponseEntity<Map> getForEntity(String apiUrl, Class<Map> class1) {
-// TODO Auto-generated method stub
-return null;
-}
+  public ResponseEntity<Map> getForEntity(String apiUrl, Class<Map> class1) {
+  // TODO Auto-generated method stub
+  return null;
+  }
 }

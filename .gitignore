@@ -1,3 +1,12 @@
+
+# Ignore application.properties
+application.properties
+
+# Ignore other files and directories
+*.class
+*.log
+.idea/
+
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
