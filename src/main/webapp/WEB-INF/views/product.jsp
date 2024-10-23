@@ -5,50 +5,44 @@
 <head>
     <meta charset="ISO-8859-1">
     <title>Product Page</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
     <style>
-        /* Advanced CSS for product cards */
+        /* Product card styling */
         .product-card {
             position: relative;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            background-color: #fff;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            padding: 15px;
         }
 
         .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
         }
 
-        /* Wishlist heart icon */
         .wishlist-heart {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    font-size: 24px;
-    color: #777;
-    border: 2px solid white;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.3);
-    padding: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 22px;
+            color: #999;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 5px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: color 0.3s, background-color 0.3s;
+        }
 
-.wishlist-heart.active {
-    color: white;
-    background-color: #ff4b4b;
-    border-color: #ff4b4b;
-}
+        .wishlist-heart.active {
+            color: #ff4b5c;
+            background-color: #fff;
+        }
 
-
-        /* Product image adjustments */
+        /* Product image */
         .product-card img {
-            max-width: 120px;
-            height: auto;
+            max-width: 150px;
             margin: 0 auto;
             transition: transform 0.3s ease;
         }
@@ -58,80 +52,137 @@
         }
 
         /* Product details */
-        .product-details {
-            margin-top: 10px;
-        }
-
         .product-details p {
             margin: 0;
-            padding: 5px 0;
+            font-size: 16px;
+            color: #333;
         }
 
-        /* View details button adjustments */
         .btn-view-details {
-            font-size: 0.8rem;
-            padding: 5px 10px;
             margin-top: 10px;
-            border-radius: 20px;
-        }
-
-        /* Unique page design elements */
-        body {
-            background-color: #f8f9fa;
-        }
-
-        .category-sidebar {
-            background-color: #343a40;
+            padding: 10px 20px;
+            border-radius: 30px;
+            background-color: #007bff;
             color: white;
-            padding: 15px;
-            border-radius: 10px;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-view-details:hover {
+            background-color: #0056b3;
+        }
+
+        /* Category Sidebar */
+        .category-sidebar {
+            background-color: #f8f9fa;
+            padding: 20px;
         }
 
         .category-sidebar a {
-            color: black;
+            color: #333;
+            font-weight: 500;
+            display: block;
+            margin: 10px 0;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
         }
 
         .category-sidebar a:hover {
-            color: #777;
-            text-decoration: none;
+            background-color: #007bff;
+            color: #fff;
         }
 
         .search-bar-container {
-            background-color: #007bff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 60%; /* Increased width for better visibility */
+            margin: 0 auto;
+        }
+
+        .search-box {
+            display: flex;
+            border-radius: 50px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 5px 15px;
+            width: 100%;
+        }
+
+        .search-input {
+            border: none;
+            background: transparent;
             padding: 15px;
-            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            flex-grow: 1;
+            border-radius: 50px;
+            color: #333;
         }
 
-        .search-bar-container input {
-            border-radius: 25px;
-            padding: 10px;
+        .btn-search {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 20px;
+            margin-left: 10px;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
         }
 
+        .btn-search:hover {
+            background-color: #0056b3;
+        }
+
+        /* Pagination */
         .pagination a {
-            font-size: 0.9rem;
-            border-radius: 20px;
+            padding: 10px 15px;
+            border-radius: 50px;
             margin: 0 5px;
+            background-color: #007bff;
+            font-size : 20px;
+            text-decoration : none;
+            color: #fff;
+            transition: background-color 0.3s ease;
         }
 
-        /* Responsive design */
+        .pagination a:hover {
+            background-color: #0056b3;
+            color: #fff;
+        }
+
+        .pagination .active {
+            background-color: #0056b3;
+            color: #fff;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
             .product-card {
                 margin-bottom: 20px;
+            }
+
+            .pagination {
+                justify-content: center;
             }
         }
     </style>
 </head>
 <body>
     <section>
-        <!-- Search Bar -->
+        <!-- Updated Search Bar -->
         <div class="container-fluid search-bar-container mt-5">
             <div class="row">
-                <div class="col-md-8 offset-md-2">
+                <div class="col-md-12 offset-md-2">
                     <form action="/products" method="get">
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="ch" placeholder="Search products...">
-                            <button class="btn btn-light text-dark ms-3 col-md-2">
-                                <i class="fa-solid fa-magnifying-glass"></i> Search
+                        <div class="input-group search-box">
+                            <input type="text" class="form-control search-input" name="ch" placeholder="Search products...">
+                            <button class="btn btn-search">
+                                <i class="fa-solid fa-magnifying-glass"></i>
                             </button>
                         </div>
                     </form>
@@ -139,100 +190,88 @@
             </div>
         </div>
 
+        <!-- Verification Message (if needed) -->
+        <c:if test="${not empty user}">
+            <div class="container mt-4">
+                <div class="alert alert-info">
+                    Welcome back, ${user.name}!
+                </div>
+            </div>
+        </c:if>
+
         <!-- Main Content -->
         <div class="container-fluid mt-4">
             <div class="row">
                 <!-- Category Sidebar -->
-                <div class="col-md-2 p-0">
+                <div class="col-md-2">
                     <div class="category-sidebar">
-                        <p class="fs-5">Category</p>
-                        <a href="/products" class="list-group-item ${paramValue == '' ? 'active' : ''}">All</a>
+                        <p class="fs-5">Categories</p>
+                        <a href="/products" class="${paramValue == '' ? 'active' : ''}">All</a>
                         <c:forEach var="c" items="${categories}">
-                            <a href="/products?category=${c.name}" class="list-group-item ${paramValue == c.name ? 'active' : ''}">
-                                ${c.name}
-                            </a>
+                            <a href="/products?category=${c.name}" class="${paramValue == c.name ? 'active' : ''}">${c.name}</a>
                         </c:forEach>
                     </div>
                 </div>
 
                 <!-- Products Section -->
                 <div class="col-md-10">
-                    <div class="card">
-                        <div class="card-body">
-                            <p class="fs-3 text-center">Products</p>
-                            <div class="row">
-                                <c:if test="${productsSize > 0}">
-                                    <c:forEach var="p" items="${products}">
-                                        <div class="col-md-3 mt-2">
-                                            <div class="card product-card text-center">
-                                                <!-- Wishlist Heart Icon -->
-                                                <a href="/user/addWishlist?productId=${p.id}" class="wishlist-heart" onclick="toggleWishlist(this)">
-                                                    <i class="fas fa-heart"></i>
-                                                </a>
-                                                
-                                                <!-- Product Image -->
-                                                <img src="/img/product_img/${p.image}" alt="${p.title}">
-                                                
-                                                <!-- Product Details -->
-                                                <div class="product-details">
-                                                    <p class="fs-5">${p.title}</p>
-                                                    <p class="fs-6 fw-bold">
-                                                        &#8377; ${p.discountPrice} <br>
-                                                        <span class="text-decoration-line-through text-secondary">&#8377; ${p.price}</span>
-                                                        <span class="fs-6 text-success">${p.discount}% off</span>
-                                                    </p>
-                                                </div>
-                                                <a href="/product/${p.id}" class="btn btn-primary btn-view-details">View Details</a>
+                    <div class="row">
+                        <c:choose>
+                            <c:when test="${empty products}">
+                                <div class="col-12 text-center mt-5">
+                                    <h3>No products found.</h3>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <c:forEach var="p" items="${products}">
+                                    <div class="col-md-3 mt-4">
+                                        <div class="product-card text-center">
+                                            <a href="/user/addWishlist?productId=${p.id}" class="wishlist-heart" onclick="toggleWishlist(this)">
+                                                <i class="fas fa-heart"></i>
+                                            </a>
+                                            <img src="/img/product_img/${p.image}" alt="${p.title}">
+                                            <div class="product-details">
+                                                <p class="fs-5">${p.title}</p>
+                                                <p>&#8377; ${p.discountPrice} <br>
+                                                    <span class="text-muted text-decoration-line-through">&#8377; ${p.price}</span>
+                                                    <span class="text-success">${p.discount}% off</span>
+                                                </p>
                                             </div>
+                                            <a href="/product/${p.id}" class="btn btn-view-details">View Details</a>
                                         </div>
-                                    </c:forEach>
-                                </c:if>
-
-                                <c:if test="${productsSize <= 0}">
-                                    <p class="fs-4 text-center mt-4 text-danger">Product not available</p>
-                                </c:if>
-                            </div>
-                        </div>
+                                    </div>
+                                </c:forEach>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
 
                     <!-- Pagination -->
-                    <div class="row">
-                        <div class="col-md-4">Total Products: ${totalElements}</div>
-                        <div class="col-md-6">
-                            <c:if test="${productsSize > 0}">
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination">
-                                        <li class="page-item ${isFirst ? 'disabled' : ''}">
-                                            <a class="page-link" href="/products?pageNo=${pageNo - 1}" aria-label="Previous">
-                                                <span aria-hidden="true">&laquo;</span>
-                                            </a>
-                                        </li>
-                                        <c:forEach var="i" begin="1" end="${totalPages}">
-                                            <li class="page-item ${pageNo + 1 == i ? 'active' : ''}">
-                                                <a class="page-link" href="/products?pageNo=${i - 1}">${i}</a>
-                                            </li>
-                                        </c:forEach>
-                                        <li class="page-item ${isLast ? 'disabled' : ''}">
-                                            <a class="page-link" href="/products?pageNo=${pageNo + 1}" aria-label="Next">
-                                                <span aria-hidden="true">&raquo;</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </c:if>
-                        </div>
+                    <div class="pagination-container mt-4 d-flex justify-content-center">
+                        <ul class="pagination">
+                            <li class="${isFirst ? 'disabled' : ''}">
+                                <a href="/products?pageNo=${pageNo - 1}">&#9666;</a>
+                            </li>
+                            <c:forEach var="i" begin="1" end="${totalPages}">
+                                <li class="${pageNo + 1 == i ? 'active' : ''}">
+                                    <a href="/products?pageNo=${i - 1}">${i}</a>
+                                </li>
+                            </c:forEach>
+                            <li class="${isLast ? 'disabled' : ''}">
+                                <a href="/products?pageNo=${pageNo + 1}">&#9656;</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <script type="text/javascript">
-    function toggleWishlist(element) {
-        element.classList.toggle('active');
-    }
-
+    <jsp:include page="footer.jsp" />
+    <script>
+        function toggleWishlist(element) {
+            element.classList.toggle("active");
+        }
     </script>
 
-    <jsp:include page="footer.jsp" />
+
 </body>
 </html>

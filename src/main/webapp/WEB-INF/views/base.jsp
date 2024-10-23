@@ -90,6 +90,14 @@
                         <c:otherwise>
                             <c:if test="${user.role == 'ROLE_ADMIN'}">
                                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="/admin/"> Home</a></li>
+                                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/admin/add-admin""> Add Admin</a></li>
+                                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/admin/users?type=2"> Admins</a></li>
+                                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/admin/products"> View</a></li>
+                                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/admin/loadAddProduct">Add </a></li>
+                                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/admin/category"> Category </a></li>
+                                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/admin/orders"> Orders </a></li>
+                                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/admin/users?type=1"> users </a></li>
+
                             </c:if>
                             <c:if test="${user.role == 'ROLE_USER'}">
                                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="/"></i> Home</a></li>

@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 @Service
 public class AuthSucessHandlerImpl implements AuthenticationSuccessHandler {
     
-    private static final Logger logger = LoggerFactory.getLogger(AuthSucessHandlerImpl.class);
+//    private static final Logger logger = LoggerFactory.getLogger(AuthSucessHandlerImpl.class);
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -31,10 +31,10 @@ public class AuthSucessHandlerImpl implements AuthenticationSuccessHandler {
         Set<String> roles = AuthorityUtils.authorityListToSet(authorities);
         
         if (roles.contains("ROLE_ADMIN")) {
-            logger.info("Admin '{}' successfully logged in.", username);  // Log successful login for admin
+//            logger.info("Admin '{}' successfully logged in.", username);  // Log successful login for admin
             response.sendRedirect("/admin/");
         } else {
-            logger.info("User '{}' successfully logged in.", username);   // Log successful login for user
+//            logger.info("User '{}' successfully logged in.", username);   // Log successful login for user
             response.sendRedirect("/");
         }
     }

@@ -8,7 +8,7 @@
     <style>
         /* Global styling */
         body {
-            background: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+            background-color : #fff;
             background-size: cover;
             color: #ffffff;
             font-family: 'Arial', sans-serif;
@@ -206,5 +206,7 @@
             </div>
         </div>
     </section>
+
+    <jsp:include page="footer.jsp" />
 </body>
 </html>
