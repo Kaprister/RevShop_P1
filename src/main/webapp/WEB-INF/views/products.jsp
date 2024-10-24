@@ -1,210 +1,111 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <%@include file="./base.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="ISO-8859-1">
-    <title>All Products</title>
-    <link rel="stylesheet" href="<c:url value='/css/bootstrap.min.css' />">
-    <script src="<c:url value='/js/bootstrap.bundle.min.js' />"></script>
-    
-    <style>
-        /* Body background color */
-        body {
+    <title>RevShop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 
-             background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvlJSal5Ro0z2SlmDFq18ohBfuicKeHfvthg&s') no-repeat center center fixed;
+    <style>
+        /* Body background image */
+        body {
+            background-color : #fff;
             background-size: cover;
             color: #f8f9fa;
         }
 
-        /* Section card layout for better structure */
-        section {
-            background-color: #ffffff; /* White background for the main content */
-            padding: 20px;
+        /* Style for the div container inside section */
+        section div.container-fluid {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            padding: 30px;
             margin: 20px auto;
-            max-width: 1200px; /* Center the content with a max width */
-            border-radius: 10px; /* Rounded corners */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for a card effect */
+            animation: fadeInUp 0.7s ease-out;
+            max-width: 1200px;
         }
 
-        /* Main header styling */
-        .text-center.fs-3 {
-            color: #333; /* Darker header text */
-            font-weight: bold;
-            margin-bottom: 20px; /* Add space below */
+        /* Keyframes for fadeInUp animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        /* Buttons */
-        .btn-primary, .btn-danger {
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
-        .btn-primary {
-            background-color: black;
-            border: none;
-        }
-
-        .btn-danger {
-            background-color: #dc3545;
-            border: none;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
-
-        .btn-danger:hover {
-            background-color: #c82333;
-        }
-
-        /* Table styles */
-        .table {
-            margin-top: 20px;
-        }
-
-        .table th {
-            background-color:#6f42c1;
-            color: white;
-            text-align: center;
-        }
-
-        .table td {
-            text-align: center;
-        }
-
-        /* Table cell padding */
-        .table td, .table th {
-            padding: 15px;
-        }
-
-        /* Success and error message styling */
-        .text-success, .text-danger {
-            font-size: 1.1rem;
-            text-align: center;
-            margin: 10px 0;
-        }
-
-        /* Pagination */
-        .pagination .page-item .page-link {
-            color: black;
-        }
-
-        .pagination .page-item.active .page-link {
-            background-color: #6f42c1;
-            border-color: #007bff;
-        }
-
-        .pagination .page-link:hover {
-            background-color: #0056b3;
-            color: white;
-        }
-
-        /* Hover effect for table rows */
+        /* Table hover effect */
         .table tbody tr:hover {
-            background-color: #f1f1f1;
-        }
-
-        /* Search form input styles */
-        .form-control {
-            border: 2px solid #007bff;
-            padding: 10px;
-        }
-
-        .form-control:focus {
-            box-shadow: none;
-            border-color: #0056b3;
-        }
-
-        /* Styling for action icons */
-        .fa-pen-to-square, .fa-trash {
-            margin-right: 5px;
-        }
-
-        /* Spacing */
-        .row {
-            margin-bottom: 20px;
-        }
-
-        /* Breadcrumb and link hover effect */
-        a.text-decoration-none {
-            color: #007bff;
-        }
-
-        a.text-decoration-none:hover {
-            color: #0056b3;
-            text-decoration: underline;
+            background-color: #f0f4f8;
+            transition: background-color 0.3s ease;
         }
     </style>
 </head>
 <body>
     <section>
-        <div class="container-fluid mt-4 p-3">
+        <div class="container-fluid p-8 bg-white rounded-lg shadow-lg">
             <div class="row">
-                <p class="text-center fs-3 mt-2">All Products</p>
-                <hr>
-                <a href="${pageContext.request.contextPath}/admin/" class="text-decoration-none">
-                    <i class="fa-solid fa-arrow-left"></i> Back
+                <p class="text-center text-3xl font-extrabold text-gray-800 mt-4">All Products</p>
+                <hr class="border-t-2 border-indigo-500 my-4">
+
+                <a href="${pageContext.request.contextPath}/admin/" class="text-indigo-500 hover:underline flex items-center">
+                    <i class="fa-solid fa-arrow-left mr-2"></i> Back
                 </a>
 
                 <% if (session.getAttribute("succMsg") != null) { %>
-                    <p class="text-success fw-bold" id="success-alert"><%= session.getAttribute("succMsg") %></p>
+                    <p class="text-green-600 font-semibold mt-4"><%= session.getAttribute("succMsg") %></p>
                     <% session.removeAttribute("succMsg"); %>
                 <% } %>
 
                 <% if (session.getAttribute("errorMsg") != null) { %>
-                    <p class="text-danger fw-bold" id="error-alert"><%= session.getAttribute("errorMsg") %></p>
+                    <p class="text-red-600 font-semibold mt-4"><%= session.getAttribute("errorMsg") %></p>
                     <% session.removeAttribute("errorMsg"); %>
                 <% } %>
 
-                <div class="col-md-4 p-3">
-                    <form action="${pageContext.request.contextPath}/admin/products" method="get">
-                        <div class="row">
-                            <div class="col">
-                                <input type="text" class="form-control" name="ch" placeholder="Search products">
-                            </div>
-                            <div class="col">
-                                <button class="btn btn-primary col">Search</button>
-                            </div>
-                        </div>
+                <div class="w-full md:w-1/3 p-3">
+                    <form action="${pageContext.request.contextPath}/admin/products" method="get" class="flex">
+                        <input type="text" class="form-control w-full p-2 border border-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-500" name="ch" placeholder="Search products">
+                        <button class="ml-2 bg-indigo-600 hover:bg-indigo-500 text-white py-2 px-4 rounded">Search</button>
                     </form>
                 </div>
 
-                <div class="p-3">
-                    <table class="table table-bordered table-hover">
-                        <thead class="table-light">
+                <div class="w-full overflow-auto p-3">
+                    <table class="table-auto w-full text-left border-collapse">
+                        <thead class="bg-indigo-600 text-white">
                             <tr>
-                                <th scope="col">Sl No</th>
-                                <th scope="col">Image</th>
-                                <th scope="col">Title</th>
-                                <th scope="col">Category</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Discount</th>
-                                <th scope="col">Discount Price</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Stock</th>
-                                <th scope="col">Action</th>
+                                <th class="p-4">Sl No</th>
+                                <th class="p-4">Image</th>
+                                <th class="p-4">Title</th>
+                                <th class="p-4">Category</th>
+                                <th class="p-4">Price</th>
+                                <th class="p-4">Discount</th>
+                                <th class="p-4">Discount Price</th>
+                                <th class="p-4">Status</th>
+                                <th class="p-4">Stock</th>
+                                <th class="p-4">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-indigo-400 font-bold">
                             <c:forEach var="p" items="${products}" varStatus="c">
-                                <tr>
-                                    <th scope="row"><c:out value="${c.index + 1}"/></th>
-                                    <td><img src="${pageContext.request.contextPath}/img/product_img/${p.image}" width="70px" height="70px"></td>
-                                    <td><c:out value="${p.title}"/></td>
-                                    <td><c:out value="${p.category}"/></td>
-                                    <td><c:out value="${p.price}"/></td>
-                                    <td><c:out value="${p.discount}"/></td>
-                                    <td><c:out value="${p.discountPrice}"/></td>
-                                    <td><c:out value="${p.isActive}"/></td>
-                                    <td><c:out value="${p.stock}"/></td>
-                                    <td>
-                                        <a href="${pageContext.request.contextPath}/admin/editProduct/${p.id}" class="btn btn-sm btn-primary">
+                                <tr class="border-b border-gray-200">
+                                    <td class="p-4"><c:out value="${c.index + 1}"/></td>
+                                    <td class="p-4"><img src="${pageContext.request.contextPath}/img/product_img/${p.image}" class="w-16 h-16 rounded-md"></td>
+                                    <td class="p-4"><c:out value="${p.title}"/></td>
+                                    <td class="p-4"><c:out value="${p.category}"/></td>
+                                    <td class="p-4"><c:out value="${p.price}"/></td>
+                                    <td class="p-4"><c:out value="${p.discount}"/></td>
+                                    <td class="p-4"><c:out value="${p.discountPrice}"/></td>
+                                    <td class="p-4"><c:out value="${p.isActive}"/></td>
+                                    <td class="p-4"><c:out value="${p.stock}"/></td>
+                                    <td class="p-4 flex">
+                                        <a href="${pageContext.request.contextPath}/admin/editProduct/${p.id}" class="bg-blue-500 hover:bg-blue-400 text-white py-1 px-3 rounded mr-2">
                                             <i class="fa-solid fa-pen-to-square"></i> Edit
                                         </a>
-                                        <a href="${pageContext.request.contextPath}/admin/deleteProduct/${p.id}" class="btn btn-sm btn-danger">
+                                        <a href="${pageContext.request.contextPath}/admin/deleteProduct/${p.id}" class="bg-red-500 hover:bg-red-400 text-white py-1 px-3 rounded">
                                             <i class="fa-solid fa-trash"></i> Delete
                                         </a>
                                     </td>
@@ -212,58 +113,54 @@
                             </c:forEach>
                         </tbody>
                     </table>
+                </div>
 
-                    <div class="row">
-                        <div class="col-md-4">Total Products: <c:out value="${totalElements}"/></div>
-                        <div class="col-md-6">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination">
-                                    <li class="page-item <c:if test="${isFirst}">disabled</c:if>">
-                                        <a class="page-link" href="${pageContext.request.contextPath}/admin/products?pageNo=${pageNo - 1}" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
+                <div class="row mt-4">
+                    <div class="col-md-4">Total Products: <c:out value="${totalElements}"/></div>
+                    <div class="col-md-6">
+                        <nav>
+                            <ul class="pagination">
+                                <li class="page-item <c:if test='${isFirst}'>disabled</c:if>">
+                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/products?pageNo=${pageNo - 1}">
+                                        &laquo;
+                                    </a>
+                                </li>
+                                <c:forEach var="i" begin="1" end="${totalPages}">
+                                    <li class="page-item <c:if test='${pageNo + 1 == i}'>active</c:if>">
+                                        <a class="page-link" href="${pageContext.request.contextPath}/admin/products?pageNo=${i - 1}">
+                                            <c:out value="${i}"/>
                                         </a>
                                     </li>
-
-                                    <c:forEach var="i" begin="1" end="${totalPages}">
-                                        <li class="page-item <c:if test="${pageNo + 1 == i}">active</c:if>">
-                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/products?pageNo=${i - 1}">
-                                                <c:out value="${i}"/>
-                                            </a>
-                                        </li>
-                                    </c:forEach>
-
-                                    <li class="page-item <c:if test="${isLast}">disabled</c:if>">
-                                        <a class="page-link" href="${pageContext.request.contextPath}/admin/products?pageNo=${pageNo + 1}" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
+                                </c:forEach>
+                                <li class="page-item <c:if test='${isLast}'>disabled</c:if>">
+                                    <a class="page-link" href="${pageContext.request.contextPath}/admin/products?pageNo=${pageNo + 1}">
+                                        &raquo;
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-
     <script>
-    // Fade out and hide the alert messages after 2 seconds
-    setTimeout(function() {
-        const successAlert = document.getElementById("success-alert");
-        if (successAlert) {
-            successAlert.style.transition = "opacity 0.5s ease-out";
-            successAlert.style.opacity = "0";
-            setTimeout(() => successAlert.style.display = "none", 500);
-        }
+        setTimeout(function() {
+            const successAlert = document.getElementById("success-alert");
+            if (successAlert) {
+                successAlert.style.transition = "opacity 0.5s ease-out";
+                successAlert.style.opacity = "0";
+                setTimeout(() => successAlert.style.display = "none", 500);
+            }
 
-        const errorAlert = document.getElementById("error-alert");
-        if (errorAlert) {
-            errorAlert.style.transition = "opacity 0.5s ease-out";
-            errorAlert.style.opacity = "0";
-            setTimeout(() => errorAlert.style.display = "none", 500);
-        }
-    }, 2000);  // 2000ms = 2 seconds
-</script>
-</body>  
+            const errorAlert = document.getElementById("error-alert");
+            if (errorAlert) {
+                errorAlert.style.transition = "opacity 0.5s ease-out";
+                errorAlert.style.opacity = "0";
+                setTimeout(() => errorAlert.style.display = "none", 500);
+            }
+        }, 2000);
+    </script>
+</body>
 </html>

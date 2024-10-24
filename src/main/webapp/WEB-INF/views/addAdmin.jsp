@@ -6,110 +6,98 @@
 <html lang="en">
 <head>
     <meta charset="ISO-8859-1">
-    <title>Add Admin</title>
+    <title>RevShop</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        /* Background styling */
-        body {
-            font-family: 'Arial', sans-serif;
-            background: url('https://images.unsplash.com/photo-1508780709619-79562169bc64?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fG9mZmljZXxlbnwwfHx8fDE2NzQ1ODU4NzU&ixlib=rb-1.2.1&q=80&w=1080') no-repeat center center fixed;
-            background-size: cover;
-            color: #fff;
-        }
+   <style>
+       .container {
+           position: relative;
+           z-index: 2;
+           margin-top: 5rem;
+           max-width: 900px;
+           background-color: rgba(255, 255, 255, 0.9);
+           padding: 2rem;
+           border-radius: 20px;
+           box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+           backdrop-filter: blur(10px);
+           transition: transform 0.3s ease, box-shadow 0.3s ease;
+       }
 
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6); /* Dark overlay for contrast */
-            z-index: 1;
-        }
+       .container:hover {
+           transform: translateY(-10px);
+           box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.2);
+       }
 
-        .container {
-            position: relative;
-            z-index: 2;
-            margin-top: 5rem;
-        }
+       .card-header {
+           background-color: #ff7f50;
+           color: #fff;
+           font-weight: bold;
+           text-align: center;
+           font-size: 1.8rem;
+           padding: 1rem;
+           border-radius: 15px 15px 0 0;
+           letter-spacing: 1.2px;
+           box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.1);
+       }
 
-        /* Card styles */
-        .card {
-            border-radius: 15px;
-            background: rgba(255, 255, 255, 0.85); /* Transparent background */
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
-            transition: box-shadow 0.3s ease, transform 0.3s ease;
-        }
+       .card-body {
+           padding: 2rem;
+           color: #333;
+           font-size: 1.1rem;
+           line-height: 1.6;
+       }
 
-        .card:hover {
-            box-shadow: 0 10px 18px rgba(0, 0, 0, 0.5);
-            transform: translateY(-5px); /* Smooth hover effect */
-        }
+       .form-label {
+           font-weight: bold;
+           color: #475c6c;
+           letter-spacing: 0.5px;
+       }
 
-        .card-header {
-            background-color: #8a8583;
-            color: white;
-            text-align: center;
-            font-size: 1.8rem;
-            padding: 15px;
-            border-radius: 15px 15px 0 0;
-        }
+       .form-control {
+           background-color: rgba(255, 255, 255, 0.95);
+           border: 1px solid #ddd;
+           color: #333;
+           padding: 0.75rem;
+           border-radius: 5px;
+           transition: border-color 0.2s ease, box-shadow 0.2s ease;
+       }
 
-        .card-body {
-            padding: 2rem;
-            color: #333;
-        }
+       .form-control:focus {
+           border-color: #ff7f50;
+           outline: none;
+           box-shadow: 0 0 8px rgba(255, 127, 80, 0.5);
+       }
 
-        /* Form styling */
-        .form-label {
-            color: #475c6c;
-            font-weight: bold;
-        }
+       .btn-primary {
+           background-color: #ff7f50;
+           border: none;
+           padding: 0.75rem 1.5rem;
+           font-size: 1.1rem;
+           font-weight: bold;
+           color: #fff;
+           border-radius: 10px;
+           width: 100%;
+           transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+       }
 
-        .form-control {
-            background-color: rgba(255, 255, 255, 0.95);
-            border: 1px solid #ddd;
-            color: #333;
-            padding: 0.75rem;
-            border-radius: 5px;
-            transition: border-color 0.2s;
-        }
+       .btn-primary:hover {
+           background-color: #e56e42;
+           box-shadow: 0px 10px 20px rgba(255, 127, 80, 0.3);
+           transform: translateY(-5px);
+       }
 
-        .form-control:focus {
-            border-color: #007bff;
-            outline: none;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
-        }
+       .text-success, .text-danger {
+           font-weight: bold;
+           font-size: 1rem;
+       }
 
-        /* Button styling */
-        .btn-primary {
-            background-color: #475c6c;
-            border: none;
-            padding: 0.75rem 1rem;
-            font-size: 1.1rem;
-            font-weight: bold;
-            width: 100%;
-            border-radius: 10px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
+       /* Responsive Design */
+       @media (max-width: 768px) {
+           .container {
+               padding: 1.5rem;
+           }
+       }
+   </style>
 
-        .btn-primary:hover {
-            background-color: #0056b3;
-            transform: translateY(-3px);
-        }
-
-        .text-success, .text-danger {
-            font-weight: bold;
-            font-size: 1rem;
-        }
-
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
-        }
-    </style>
 </head>
 <body>
     <div class="overlay"></div>

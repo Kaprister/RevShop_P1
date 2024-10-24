@@ -6,13 +6,13 @@
 <html lang="en">
 <head>
     <meta charset="ISO-8859-1">
-    <title>Manage Categories</title>
+    <title>RevShop</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             
             font-family: 'Arial', sans-serif;
-             background: url('data:image/jpeg;base64,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') no-repeat center center fixed;
+            background-color : #fff;
             background-size: cover;
             color: #f8f9fa;
             
@@ -20,142 +20,79 @@
             
         }
 
-/* Additional Styles for Table Header */
-table thead {
-    background-color: #333; /* Dark grey background for header */
-    color: #fff; /* White text color */
-}
-
-table thead th {
-    padding: 1rem;
-    text-align: center;
-    border-bottom: 2px solid #444; /* Slightly lighter border for separation */
-}
-
-        .card {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.3s ease, transform 0.3s ease;
-            
+        /* Additional Styles for Table Header */
+        table thead {
+            background-color: #333; /* Dark grey background for header */
+            color: #fff; /* White text color */
         }
 
-        .card:hover {
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            transform: translateY(-5px);
-        }
-
-        .card-header {
-           background-color: #007bff;
-            color: #fff;
-            text-align: center;
+        table thead th {
             padding: 1rem;
-            border-bottom: 1px solid #444;
-        }
-      
-        .card-body {
-            padding: 2rem;
-        }
-
-        .btn-primary {
-            background-color: #343a40;
-            border: none;
-            color: #fff;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            background-color: #495057;
-        }
-
-        .form-control {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 0.75rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-control:focus {
-            border-color: #343a40;
-            box-shadow: none;
-        }
-
-        .form-label {
-            font-weight: 500;
-        }
-
-        table {
-            width: 100%;
-            margin: 1rem 0;
-            border-collapse: separate;
-            border-spacing: 0;
-        }
-
-        table th, table td {
             text-align: center;
-            padding: 1rem;
+            border-bottom: 2px solid #444; /* Slightly lighter border for separation */
         }
 
-        table img {
-            object-fit: cover;
-            border-radius: 4px;
-        }
+              .card {
+                  border: 1px solid #ddd;
+                  border-radius: 8px;
+                  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                  transition: box-shadow 0.3s ease, transform 0.3s ease;
+                  padding: 1rem; /* Increased padding for better visual balance */
+              }
 
-        thead th {
-            background-color: #e9ecef;
-            color: #343a40;
-        }
+              .card:hover {
+                  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                  transform: translateY(-5px);
+              }
 
-        tbody tr:nth-child(odd) {
-            background-color: #f9f9f9;
-        }
-          
-    
+              .btn-primary {
+                  background-color: #007bff; /* Updated for better contrast */
+                  border: none;
+                  color: #fff;
+                  padding: 0.75rem 1.5rem; /* Increased padding for a more prominent button */
+                  font-size: 1.1rem;
+                  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+              }
 
-        tbody tr:nth-child(even) {
-            background-color: #ffffff;
-        }
+              .btn-primary:hover {
+                  background-color: #0056b3;
+                  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow on hover */
+              }
 
-        tbody tr:hover {
-            background-color: #f1f1f1;
-        }
+              .form-control {
+                  border: 1px solid #ccc;
+                  border-radius: 5px;
+                  padding: 1rem; /* More padding for larger input fields */
+                  transition: border-color 0.3s ease;
+              }
 
-        .pagination {
-            margin-top: 1rem;
-        }
+              .form-control:focus {
+                  border-color: #007bff;
+                  box-shadow: 0 0 5px rgba(0, 123, 255, 0.25); /* Subtle blue shadow on focus */
+              }
 
-        .pagination .page-item.disabled .page-link {
-            background-color: #e9ecef;
-            border-color: #ddd;
-            color: #6c757d;
-        }
+              @media (max-width: 768px) {
+                  .container {
+                      padding: 1.5rem; /* Increased padding for smaller screens */
+                  }
 
-        .pagination .page-item.active .page-link {
-            background-color: #343a40;
-            border-color: #343a40;
-            color: #fff;
-        }
+                  .card {
+                      margin-bottom: 1rem;
+                      padding: 1.5rem; /* Increased padding for smaller screens */
+                  }
+              }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
+              @media (max-width: 576px) {
+                  .form-control {
+                      font-size: 1rem;
+                      padding: 0.5rem 1rem; /* Smaller padding on very small screens */
+                  }
 
-            .card {
-                margin-bottom: 1rem;
-            }
-        }
+                  .btn-primary {
+                      font-size: 1rem; /* Adjusted button size */
+                  }
+              }
 
-        @media (max-width: 576px) {
-            .form-control {
-                font-size: 0.875rem;
-            }
-
-            .btn-primary {
-                font-size: 0.875rem;
-                 background-color: #007bff;
-            }
-        }
     </style>
 </head>
 <body>

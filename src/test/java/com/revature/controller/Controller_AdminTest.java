@@ -93,7 +93,7 @@ public class Controller_AdminTest {
 
 		// Assert
 		verify(model).addAttribute(eq("categories"), eq(categories));
-		assertEquals("admin/add_product", viewName);
+		assertEquals("addProduct", viewName);
 	}
 
 	@Test
@@ -107,7 +107,7 @@ public class Controller_AdminTest {
 
 		// Assert
 		verify(model).addAttribute(eq("categories"), eq(categories));
-		assertEquals("admin/add_product", viewName);
+		assertEquals("addProduct", viewName);
 	}
 
 

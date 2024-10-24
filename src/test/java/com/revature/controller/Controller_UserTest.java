@@ -51,11 +51,11 @@ class Controller_UserTest {
     void setUp() {
         MockitoAnnotations.initMocks(this);
         user = new UserDtls();
-        user.setEmail("test@example.com");
+        user.setEmail("sushantkapri@gmail.com");
 
         // Mock the Principal to return the user's email
-        when(principal.getName()).thenReturn("test@example.com");
-        when(userService.getUserByEmail("test@example.com")).thenReturn(user);
+        when(principal.getName()).thenReturn("sushantkapri@gmail.com");
+        when(userService.getUserByEmail("sushantkapri@gmail.com")).thenReturn(user);
     }
 
     @Test

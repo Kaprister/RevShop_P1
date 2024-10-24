@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <meta charset="ISO-8859-1">
-    <title>Order Page</title>
+    <title>RevShop</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <style>

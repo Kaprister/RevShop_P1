@@ -4,8 +4,10 @@
 <html lang="en">
 <head>
     <meta charset="ISO-8859-1">
-    <title>Admin Dashboard</title>
+    <title>RevShop Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
+
         /* Global styling */
         body {
             background-color : #fff;
@@ -15,198 +17,153 @@
             height: 100vh;
         }
 
-        .container {
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-            max-width: 1200px;
-            margin: 0 auto;
-            height: 100vh;
+        /* Custom hover and animation styles */
+        .sidebar-card:hover {
+            transform: translateX(10px);
+            transition: transform 0.3s ease-in-out, background-color 0.3s;
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
-        .dashboard-title {
-            font-size: 3rem;
-            color: #fff;
-            font-weight: bold;
-            text-transform: uppercase;
-            text-align: center;
-            letter-spacing: 2px;
-            margin-bottom: 2rem;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
-            position: relative;
-            z-index: 2;
+        .sidebar-card img {
+            transition: transform 0.3s;
         }
 
-        .dashboard-title span {
-            color: #FFBF00;
-            text-shadow: 2px 2px 10px rgba(0, 255, 255, 0.5);
+        .sidebar-card:hover img {
+            transform: scale(1.1);
         }
 
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4x4 layout */
-            grid-template-rows: repeat(4, 1fr);
-            gap: 1.5rem;
-            justify-items: center;
-            align-items: center;
-            position: relative;
+        .sidebar {
+            background-color: #1F2937; /* Dark gray background for sidebar */
         }
 
-        .card {
-            border: none;
-            border-radius: 50%;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-            width: 250px;
-            height: 210px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background-color: #ffffff;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-        }
-
-        .card img {
-            width: 60px;
-            height: 60px;
-            object-fit: contain;
-        }
-
-        .card-title {
-            font-size: 1rem;
-            margin-top: 0.5rem;
-            color: #007bff;
-            font-weight: bold;
-        }
-
-        a.text-decoration-none {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        /* Create circular arrangement */
-        .center-item {
-            grid-column: 2 / span 2;
-            grid-row: 2 / span 2;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .center-card {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            background-color: #f1c40f;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .dashboard-grid {
-                grid-template-columns: repeat(2, 1fr);
-                grid-template-rows: repeat(3, 1fr);
-            }
-
-            .card {
-                width: 120px;
-                height: 120px;
-            }
-
-            .center-card {
-                width: 150px;
-                height: 150px;
-            }
-
-            .card-title {
-                font-size: 0.8rem;
-            }
+        .sidebar-title {
+            letter-spacing: 0.1rem;
         }
     </style>
 </head>
-<body>
-    <section>
-        <div class="container p-5">
-            <p class="dashboard-title"><span>Admin Dashboard</span></p>
-            <div class="dashboard-grid">
-                <!-- 4x4 Circular Layout -->
-                
-               
+<body class="">
 
-                <div class="card">
-                    <a href="/admin/products" class="text-decoration-none">
-                        <div class="card-body">
-                            <img src="/img/Images/prod.png" class="img-fluid" alt="View Product">
-                            <h4 class="card-title">View Product</h4>
-                        </div>
-                    </a>
-                </div>
-                
-                <div class="card">
-                    <a href="/admin/add-admin" class="text-decoration-none">
-                        <div class="card-body">
-                            <img src="/img/Images/admini.png" class="img-fluid" alt="Add Admin">
-                            <h4 class="card-title">Add Admin</h4>
-                        </div>
-                    </a>
-                </div>
-                
-                <div class="card">
-                    <a href="/admin/users?type=2" class="text-decoration-none">
-                        <div class="card-body">
-                            <img src="/img/Images/admin.png" class="img-fluid" alt="Admin">
-                            <h4 class="card-title">Admin</h4>
-                        </div>
-                    </a>
-                </div>
-                
-                 <div class="card">
-                    <a href="/admin/loadAddProduct" class="text-decoration-none">
-                        <div class="card-body">
-                            <img src="/img/Images/Productsi.png" class="img-fluid" alt="Product">
-                            <h4 class="card-title">Add Product</h4>
-                        </div>
-                    </a>
-                </div>
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside class="sidebar w-64 min-h-screen px-6 py-8 shadow-lg text-white flex flex-col">
+            <p class="text-3xl font-bold sidebar-title mb-8">Admin Dashboard</p>
 
-                <div class="card">
-                    <a href="/admin/category" class="text-decoration-none">
-                        <div class="card-body">
-                            <img src="/img/Images/cat.png" class="img-fluid" alt="Add Category">
-                            <h4 class="card-title">Add Category</h4>
-                        </div>
-                    </a>
-                </div>
+            <!-- Sidebar Menu Cards -->
+            <div class="space-y-6 flex-grow">
+                <a href="/admin/products" class="sidebar-card flex items-center p-4 rounded-lg bg-gray-800 shadow-lg hover:bg-gray-700">
+                    <img src="/img/Images/prod.png" class="w-10 h-10 mr-4" alt="View Product">
+                    <h4 class="text-xl font-semibold">View Product</h4>
+                </a>
 
-                <div class="card">
-                    <a href="/admin/orders" class="text-decoration-none">
-                        <div class="card-body">
-                            <img src="/img/Images/orderi.png" class="img-fluid" alt="Orders">
-                            <h4 class="card-title">Orders</h4>
-                        </div>
-                    </a>
-                </div>
+                <a href="/admin/add-admin" class="sidebar-card flex items-center p-4 rounded-lg bg-gray-800 shadow-lg hover:bg-gray-700">
+                    <img src="/img/Images/admini.png" class="w-10 h-10 mr-4" alt="Add Admin">
+                    <h4 class="text-xl font-semibold">Add Admin</h4>
+                </a>
 
-                
+                <a href="/admin/users?type=2" class="sidebar-card flex items-center p-4 rounded-lg bg-gray-800 shadow-lg hover:bg-gray-700">
+                    <img src="/img/Images/admin.png" class="w-10 h-10 mr-4" alt="Admin">
+                    <h4 class="text-xl font-semibold">Admin</h4>
+                </a>
 
-                <div class="card">
-                    <a href="/admin/users?type=1" class="text-decoration-none">
-                        <div class="card-body">
-                            <img src="/img/Images/useri.png" class="img-fluid" alt="Users">
-                            <h4 class="card-title">Users</h4>
-                        </div>
-                    </a>
-                </div>
+                <a href="/admin/loadAddProduct" class="sidebar-card flex items-center p-4 rounded-lg bg-gray-800 shadow-lg hover:bg-gray-700">
+                    <img src="/img/Images/Productsi.png" class="w-10 h-10 mr-4" alt="Add Product">
+                    <h4 class="text-xl font-semibold">Add Product</h4>
+                </a>
 
-                
+                <a href="/admin/category" class="sidebar-card flex items-center p-4 rounded-lg bg-gray-800 shadow-lg hover:bg-gray-700">
+                    <img src="/img/Images/cat.png" class="w-10 h-10 mr-4" alt="Add Category">
+                    <h4 class="text-xl font-semibold">Add Category</h4>
+                </a>
 
-                
+                <a href="/admin/orders" class="sidebar-card flex items-center p-4 rounded-lg bg-gray-800 shadow-lg hover:bg-gray-700">
+                    <img src="/img/Images/orderi.png" class="w-10 h-10 mr-4" alt="Orders">
+                    <h4 class="text-xl font-semibold">Orders</h4>
+                </a>
+
+                <a href="/admin/users?type=1" class="sidebar-card flex items-center p-4 rounded-lg bg-gray-800 shadow-lg hover:bg-gray-700">
+                    <img src="/img/Images/useri.png" class="w-10 h-10 mr-4" alt="Users">
+                    <h4 class="text-xl font-semibold">Users</h4>
+                </a>
             </div>
-        </div>
-    </section>
+        </aside>
 
-    <jsp:include page="footer.jsp" />
+        <!-- Main Content -->
+        <main class="flex-1 p-10 bg-white shadow-lg rounded-lg">
+            <div class="text-4xl font-bold text-gray-700 mb-5">
+                Welcome to the Admin Dashboard
+            </div>
+            <p class="text-gray-600 mt-2">Use the sidebar to navigate the admin tools.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+                <!-- Card for Number of Users -->
+                <div class="bg-white shadow-lg rounded-lg p-6 flex items-center">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-users text-blue-600 text-3xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h2 class="text-xl font-bold text-gray-700">Total Users</h2>
+                        <p class="text-gray-600">1234</p> <!-- Replace with dynamic data -->
+                    </div>
+                </div>
+
+                <!-- Card for Number of Admins -->
+                <div class="bg-white shadow-lg rounded-lg p-6 flex items-center">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-user-shield text-green-600 text-3xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h2 class="text-xl font-bold text-gray-700">Total Admins</h2>
+                        <p class="text-gray-600">56</p> <!-- Replace with dynamic data -->
+                    </div>
+                </div>
+
+                <!-- Card for Number of Products -->
+                <div class="bg-white shadow-lg rounded-lg p-6 flex items-center">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-box text-purple-600 text-3xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h2 class="text-xl font-bold text-gray-700">Total Products</h2>
+                        <p class="text-gray-600">789</p> <!-- Replace with dynamic data -->
+                    </div>
+                </div>
+
+                <!-- Card for Total Income -->
+                <div class="bg-white shadow-lg rounded-lg p-6 flex items-center">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-dollar-sign text-yellow-600 text-3xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h2 class="text-xl font-bold text-gray-700">Total Income</h2>
+                        <p class="text-gray-600">$12,345.67</p> <!-- Replace with dynamic data -->
+                    </div>
+                </div>
+
+                <!-- Card for Total Orders -->
+                <div class="bg-white shadow-lg rounded-lg p-6 flex items-center">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-shopping-cart text-red-600 text-3xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h2 class="text-xl font-bold text-gray-700">Total Orders</h2>
+                        <p class="text-gray-600">345</p> <!-- Replace with dynamic data -->
+                    </div>
+                </div>
+
+                <!-- Card for Total Revenue -->
+                <div class="bg-white shadow-lg rounded-lg p-6 flex items-center">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-chart-line text-teal-600 text-3xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h2 class="text-xl font-bold text-gray-700">Total Revenue</h2>
+                        <p class="text-gray-600">$15,678.90</p> <!-- Replace with dynamic data -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
 </body>
 </html>

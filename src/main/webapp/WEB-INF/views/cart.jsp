@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <meta charset="ISO-8859-1">
-    <title>Cart Page</title>
+    <title>RevShop</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 

@@ -6,166 +6,167 @@
 <html lang="en">
 <head>
     <meta charset="ISO-8859-1">
-    <title>All Orders</title>
+    <title>RevShop</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        body {
-            background: linear-gradient(135deg, #3f8da7, #3a8181);
-            color: #316ca2;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+       /* Background and general text styling */
+       body {
+           background: linear-gradient(135deg, #3f8da7, #3a8181);
+           color: #316ca2;
+           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+       }
 
-        .page-header {
-            text-align: center;
-            margin-top: 2rem;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #0b0c0e;
-            animation: fadeIn 1s ease;
-        }
+       /* Page header styling */
+       .page-header {
+           text-align: center;
+           margin-top: 2rem;
+           font-size: 2.5rem;
+           font-weight: 700;
+           color: #0b0c0e;
+           animation: fadeIn 1s ease;
+       }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
+       /* Fade-in animation for page header */
+       @keyframes fadeIn {
+           from {
+               opacity: 0;
+           }
+           to {
+               opacity: 1;
+           }
+       }
 
-        .table {
-            width: 100%;
-            margin-bottom: 2rem;
-            background-color: rgb(6, 5, 10);
-            border-radius: 0.5rem;
-            overflow: hidden;
-            box-shadow: 0 0 20px rgba(9, 147, 55, 0.05);
-            animation: slideIn 0.8s ease;
-        }
+       /* Updated DIV container inside SECTION */
+       section .container-fluid {
+           background-color: #ffffff;
+           padding: 2rem;
+           border-radius: 1rem;
+           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+           margin-top: 2rem;
+           animation: fadeInUp 0.8s ease-in-out;
+       }
 
-        @keyframes slideIn {
-            from {
-                transform: translateY(20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
+       /* Fade-in up animation for the container */
+       @keyframes fadeInUp {
+           from {
+               transform: translateY(20px);
+               opacity: 0;
+           }
+           to {
+               transform: translateY(0);
+               opacity: 1;
+           }
+       }
 
-        .table thead th {
-            background-color: #08090a;
-            color: #fff;
-            text-align: center;
-            padding: 1rem;
-            border-bottom: 2px solid #dee2e6;
-        }
+       /* Adding some padding inside the inner rows */
+       section .row {
+           margin-bottom: 1.5rem;
+       }
 
-        .table tbody tr {
-            border-bottom: 1px solid #2f1a85;
-        }
+       /* Styling links inside the container */
+       section .container-fluid a {
+           font-weight: 500;
+           color: #3f8da7;
+           text-decoration: none;
+       }
 
-        .table tbody tr:nth-child(odd) {
-            background-color: #3169a0;
-        }
+       section .container-fluid a:hover {
+           color: #0b7abf;
+           text-decoration: underline;
+       }
 
-        .table tbody tr:hover {
-            background-color: #3d6e9f;
-            transition: background-color 0.3s ease;
-        }
+       /* Styling the search input group */
+       .input-group .form-control {
+           border-radius: 0.5rem 0 0 0.5rem;
+           border: 2px solid #ced4da;
+           transition: border-color 0.3s ease;
+       }
 
-        .table td {
-            padding: 1rem;
-            vertical-align: middle;
-            color: #31638e;
-        }
+       .input-group .form-control:focus {
+           border-color: #0b7abf;
+           box-shadow: 0 0 5px rgba(13, 110, 253, 0.25);
+       }
 
-        .btn-primary, .btn-dark {
-            background-color: #677a8e;
-            border: none;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
+       /* Button styling for input group */
+       .input-group .btn {
+           border-radius: 0 0.5rem 0.5rem 0;
+           background-color: #0b7abf;
+           border: none;
+           font-weight: 600;
+           color: #fff;
+           transition: background-color 0.3s ease;
+       }
 
-        .btn-primary:hover, .btn-dark:hover {
-            background-color: #0b1cd7;
-            transform: scale(1.05);
-        }
+       .input-group .btn:hover {
+           background-color: #045a94;
+       }
 
-        .alert {
-            border-radius: 0.5rem;
-            margin-bottom: 1.5rem;
-            padding: 1rem;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-        }
+       /* Success and error message styling */
+       .alert {
+           border-radius: 0.5rem;
+           padding: 1rem;
+           box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+           font-size: 1rem;
+       }
 
-        .pagination {
-            justify-content: center;
-            margin-top: 1.5rem;
-        }
+       /* Table styling */
+       .table {
+           background-color: #ffffff;
+           border-radius: 1rem;
+           box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+           overflow: hidden;
+           animation: fadeInUp 0.8s ease-in-out;
+       }
 
-        .pagination .page-item.active .page-link {
-            background-color: #0dfd7d;
-            border-color: #0d6efd;
-            color: #fff;
-        }
+       /* Pagination styling */
+       .pagination {
+           justify-content: center;
+           margin-top: 1.5rem;
+       }
 
-        .pagination .page-link {
-            border-radius: 0.5rem;
-            margin: 0 0.2rem;
-            padding: 0.5rem 1rem;
-            transition: background-color 0.3s ease;
-        }
+       .pagination .page-link {
+           background-color: #ffffff;
+           border-radius: 0.5rem;
+           padding: 0.5rem 1rem;
+           box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+           transition: background-color 0.3s ease;
+       }
 
-        .pagination .page-link:hover {
-            background-color: #f1f1f1;
-        }
+       .pagination .page-link:hover {
+           background-color: #f1f1f1;
+       }
 
-        .form-control {
-            border-radius: 0.5rem;
-            border: 1px solid #ced4da;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
+       .pagination .page-item.active .page-link {
+           background-color: #0dfd7d;
+           border-color: #0d6efd;
+           color: #fff;
+       }
 
-        .form-control:focus {
-            border-color: #0d6efd;
-            box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
-        }
+       /* Responsive styles */
+       @media (max-width: 768px) {
+           section .container-fluid {
+               padding: 1.5rem;
+           }
 
-        .input-group .form-control {
-            border-radius: 0.5rem 0 0 0.5rem;
-        }
+           .table {
+               font-size: 0.875rem;
+           }
+       }
 
-        .input-group .btn {
-            border-radius: 0 0.5rem 0.5rem 0;
-        }
+       @media (max-width: 576px) {
+           .page-header {
+               font-size: 1.75rem;
+           }
 
-        .btn-close {
-            background-color: transparent;
-            border: none;
-            font-size: 1rem;
-        }
+           .form-control, .btn-primary {
+               font-size: 0.875rem;
+           }
+       }
 
-        @media (max-width: 768px) {
-            .table thead th, .table td {
-                font-size: 0.875rem;
-                padding: 0.75rem;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .page-header {
-                font-size: 1.75rem;
-            }
-
-            .form-control, .btn-primary {
-                font-size: 0.875rem;
-            }
-        }
     </style>
+
+
 </head>
 <body>
     <section>

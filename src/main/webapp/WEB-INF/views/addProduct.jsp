@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="ISO-8859-1">
-    <title>Add Product</title>
+    <title>RevShop</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- FontAwesome for icons -->
@@ -14,14 +14,14 @@
         /* Global Styles */
         body {
             font-family: 'Roboto', sans-serif;
-            background: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+            background-color : #fff;
             background-size: cover;
             color: #f8f9fa;
             min-height: 100vh;
             position: relative;
         }
 
-        .overlay {
+        /*.overlay {
             position: absolute;
             top: 0;
             left: 0;
@@ -30,84 +30,94 @@
             background: rgba(0, 0, 0, 0.7);
             z-index: 1;
             margin-top: -89px;
-        }
+        }*/
 
-        .container {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-            padding-top: 5rem;
-            padding-bottom: 2rem;
+        /* Modernized DIV Container inside SECTION */
+        section .container {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 2rem;
+            /*border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            */
         }
+        /*
+        section .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        */
 
         .card {
+            color : rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
             border-radius: 15px;
-            background: rgba(255, 255, 255, 0.25);
+            padding: 20px;
             backdrop-filter: blur(20px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            width: 700px;
-            margin-left: -90px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
         }
 
         .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+            /*transform: scale(0.5);*/
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         .card-header {
-            background-color: #8a8583;
+            background-color: #6c63ff;
             color: white;
+            font-size: 1.75rem;
             text-align: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-            padding: 1rem;
-            border-radius: 15px 15px 0 0;
             text-transform: uppercase;
+            padding: 1.5rem;
+            border-radius: 15px 15px 0 0;
+            font-weight: bold;
+            letter-spacing: 1px;
         }
 
         .card-body {
             padding: 2rem;
+            color: #fff;
         }
 
-        .form-label {
-            color: #f8f9fa;
-             
+        label{
+            color : black;
+            font : bold;
         }
 
         input, textarea, select {
             background-color: rgba(255, 255, 255, 0.9);
-            border: 1px solid #ccc;
+            border: 2px solid transparent;
             color: #333;
-            transition: all 0.3s ease;
-        }
-
-        input:hover, textarea:hover, select:hover {
-            border-color: #6c63ff;
-            box-shadow: 0 0 5px rgba(108, 99, 255, 0.5);
+            border-radius: 10px;
+            padding: 0.75rem;
+            transition: border 0.3s ease;
         }
 
         input:focus, textarea:focus, select:focus {
-            border-color: #6c63ff;
-            box-shadow: none;
+            border: 2px solid #6c63ff;
+            outline: none;
+            box-shadow: 0 0 10px rgba(108, 99, 255, 0.4);
         }
 
         .btn-primary {
-            background-color: #8a8583;
+            background-color: #6c63ff;
             border: none;
-            padding: 0.75rem;
+            border-radius: 10px;
+            padding: 0.75rem 1.5rem;
             font-size: 1rem;
             font-weight: bold;
-            width: 100%;
-            border-radius: 10px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            transition: background-color 0.5s ease, transform 0.5s ease;
         }
 
         .btn-primary:hover {
             background-color: #574bfc;
-            transform: translateY(-5px);
+            /*transform: scale(1);*/
         }
+
+
 
         .text-success, .text-danger {
             font-weight: bold;

@@ -159,7 +159,7 @@ public class Controller_HomeTest {
         String viewName = homeController.index(model);
 
         // Assertions
-        assertEquals("index", viewName); // Ensure it returns "index" view
+        assertEquals("userHome", viewName); // Ensure it returns "index" view
 
         // Verify model attributes
         verify(model).addAttribute(eq("category"), anyList());

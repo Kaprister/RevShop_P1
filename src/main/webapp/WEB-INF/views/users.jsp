@@ -15,8 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
-            background-color: #f8f9fa;
-             background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1_uPrbwmYLos8p33HB7EBRPANPQQvPz64CA&s') no-repeat center center fixed;
+            background-color: white;
             color: #495057;
              background-size: cover;
             font-family: 'Arial', sans-serif;
@@ -28,8 +27,11 @@
         }
 
         .card-header {
-            background-color: #343a40;
-            color: #fff;
+            background-color: #ff7f50;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.8rem;
             border-radius: 15px 15px 15px 15px;
             padding: 1rem;
         }
@@ -49,7 +51,7 @@
         }
 
         .table thead th {
-            background-color: #343a40;
+            background-color: blue;
             color: #fff;
             text-align: center;
         }
@@ -87,6 +89,10 @@
         .text-success, .text-danger {
             margin-bottom: 1rem;
             font-weight: 600;
+        }
+        .action-button{
+            display : flex;
+            gap: 10px;
         }
 
         @media (max-width: 768px) {
@@ -177,7 +183,7 @@
                                     <td>${u.mobileNumber}</td>
                                     <td>${u.address}, ${u.city}, ${u.state}, ${u.pincode}</td>
                                     <td>${u.isEnable}</td>
-                                    <td>
+                                    <td class ="action-button">
                                         <a href="${pageContext.request.contextPath}/admin/updateSts?status=true&id=${u.id}&type=${userType}" class="btn btn-sm btn-primary">Active</a>
                                         <a href="${pageContext.request.contextPath}/admin/updateSts?status=false&id=${u.id}&type=${userType}" class="btn btn-sm btn-danger">Inactive</a>
                                     </td>
