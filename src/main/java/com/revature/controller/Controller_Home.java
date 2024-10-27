@@ -9,9 +9,12 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -57,7 +60,7 @@ public class Controller_Home {
     private UserService userService;
 
     @Autowired
-    private ReviewService reviewService; 
+    private ReviewService reviewService;
 
     @Autowired
     private MailHelper commonUtil;
@@ -85,11 +88,11 @@ public class Controller_Home {
     @GetMapping("/")
     public String index(Model m) {
         List<Category> allActiveCategory = categoryService.getAllActiveCategory().stream()
-            .sorted((c1, c2) -> c2.getId().compareTo(c1.getId()))
-            .limit(6).toList();
+                .sorted((c1, c2) -> c2.getId().compareTo(c1.getId()))
+                .limit(6).toList();
         List<Product> allActiveProducts = productService.getAllActiveProducts("").stream()
-            .sorted((p1, p2) -> p2.getId().compareTo(p1.getId()))
-            .limit(8).toList();
+                .sorted((p1, p2) -> p2.getId().compareTo(p1.getId()))
+                .limit(8).toList();
         m.addAttribute("category", allActiveCategory);
         m.addAttribute("products", allActiveProducts);
         return "userHome";
@@ -117,7 +120,7 @@ public class Controller_Home {
 
     @GetMapping("/signin")
     public String login() {
-        return "login"; 
+        return "login";
     }
 
     @GetMapping("/register")
@@ -126,20 +129,70 @@ public class Controller_Home {
     }
 
     @GetMapping("/products")
-    public String products(Model m, @RequestParam(value = "category", defaultValue = "") String category,
-            @RequestParam(name = "pageNo", defaultValue = "0") Integer pageNo,
-            @RequestParam(name = "pageSize", defaultValue = "12") Integer pageSize,
-            @RequestParam(defaultValue = "") String ch, Principal principal) {
+    public String products(Model m,
+                           @RequestParam(value = "category", defaultValue = "") String category,
+                           @RequestParam(name = "pageNo", defaultValue = "0") Integer pageNo,
+                           @RequestParam(name = "pageSize", defaultValue = "12") Integer pageSize,
+                           @RequestParam(value = "ch", defaultValue = "") String ch,
+                           @RequestParam(value = "type", defaultValue = "") String type, // New param for type
+                           @RequestParam(value = "subCategory", defaultValue = "") String subCategory, // New param for subcategory
+                           @RequestParam(value = "size", defaultValue = "") String size, // New param for size
+                           Principal principal) {
+
+        // Log the parameters received
+        System.out.println("Received parameters:");
+        System.out.println("Category: " + category);
+        System.out.println("Page No: " + pageNo);
+        System.out.println("Page Size: " + pageSize);
+        System.out.println("Search Term: " + ch);
+        System.out.println("Type: " + type);
+        System.out.println("SubCategory: " + subCategory);
+        System.out.println("Size: " + size);
 
         List<Category> categories = categoryService.getAllActiveCategory();
+        System.out.println("Categories: " + categories); // Log categories list
         m.addAttribute("paramValue", category);
         m.addAttribute("categories", categories);
 
-        Page<Product> page = StringUtils.isEmpty(ch)
-            ? productService.getAllActiveProductPagination(pageNo, pageSize, category)
-            : productService.searchActiveProductPagination(pageNo, pageSize, category, ch);
+        // Fetch all types initially
+        // Example: Filter out null values
+        List<String> types = categoryService.getAllTypes().stream()
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+        System.out.println("Types: " + types); // Log types list
+
+        // Fetch subcategories based on type
+        List<String> subCategories = StringUtils.isEmpty(type)
+                ? Collections.emptyList()
+                : categoryService.getSubCategoriesByTypeOrCategory(type, category);
+        System.out.println("SubCategories: " + subCategories); // Log subcategories list
+        m.addAttribute("subCategories", subCategories);
+
+        // Fetch sizes only if a type is selected
+        List<String> sizes = StringUtils.isEmpty(type)
+                ? Collections.emptyList()
+                : categoryService.getAllSizes().stream()
+                .filter(Objects::nonNull) // Filter out null values
+                .collect(Collectors.toList());
+        System.out.println("Sizes: " + sizes); // Log sizes list
+        m.addAttribute("sizes", sizes);
+
+
+        Page<Product> page;
+
+        // Check if any filters are applied (ch, type, subCategory, size)
+        if (StringUtils.isEmpty(ch) && StringUtils.isEmpty(type) && StringUtils.isEmpty(subCategory) && StringUtils.isEmpty(size)) {
+            // No filters, fetch all active products
+            page = productService.getAllActiveProductPagination(pageNo, pageSize, category);
+        } else {
+            // Apply filters and fetch products based on the provided filters
+            page = productService.getFilteredActiveProductPagination(pageNo, pageSize, category, type, subCategory, size);
+        }
+
 
         List<Product> products = page.getContent();
+        System.out.println("Products fetched: " + products); // Log products list
+
         m.addAttribute("products", products);
         m.addAttribute("productsSize", products.size());
 
@@ -149,15 +202,17 @@ public class Controller_Home {
         m.addAttribute("totalPages", page.getTotalPages());
         m.addAttribute("isFirst", page.isFirst());
         m.addAttribute("isLast", page.isLast());
+
         if (principal != null) {
-	        UserDtls user = userService.getUserByEmail(principal.getName());
-	        m.addAttribute("userRole", user.getRole()); // Add user role to model
-	    } else {
-	        m.addAttribute("userRole", "ROLE_GUEST"); // Default role if not logged in
-	    }
+            UserDtls user = userService.getUserByEmail(principal.getName());
+            m.addAttribute("userRole", user.getRole()); // Add user role to model
+        } else {
+            m.addAttribute("userRole", "ROLE_GUEST"); // Default role if not logged in
+        }
 
         return "product";
     }
+
 
     @GetMapping("/product/{id}")
     public String product(@PathVariable int id, Model m) {
@@ -171,11 +226,11 @@ public class Controller_Home {
 
     @PostMapping("/saveReview")
     public String saveReview(
-        @RequestParam("productId") int productId,
-        @RequestParam("userId") int userId,
-        @RequestParam("rating") int rating,
-        @RequestParam("comment") String comment,
-        RedirectAttributes redirectAttributes) {
+            @RequestParam("productId") int productId,
+            @RequestParam("userId") int userId,
+            @RequestParam("rating") int rating,
+            @RequestParam("comment") String comment,
+            RedirectAttributes redirectAttributes) {
 
         // Set current date and time
         LocalDateTime reviewDate = LocalDateTime.now();
@@ -207,46 +262,46 @@ public class Controller_Home {
     }
 
 
-	
-	@PostMapping("/saveUser")
-	public String saveUser(@ModelAttribute UserDtls user, @RequestParam("img") MultipartFile file, HttpSession session)
-	        throws IOException {
 
-	    Boolean existsEmail = userService.existsEmail(user.getEmail());
+    @PostMapping("/saveUser")
+    public String saveUser(@ModelAttribute UserDtls user, @RequestParam("img") MultipartFile file, HttpSession session)
+            throws IOException {
 
-	    if (existsEmail) {
-	        session.setAttribute("errorMsg", "Email already exists");
-	    } else {
-	        // Assign role based on the user's selection
-	        if ("buyer".equals(user.getRole())) {
-	            user.setRole("ROLE_USER");
-	        } else if ("seller".equals(user.getRole())) {
-	            user.setRole("ROLE_ADMIN");
-	        }
+        Boolean existsEmail = userService.existsEmail(user.getEmail());
 
-	        // Set default image or uploaded image
-	        String imageName = file.isEmpty() ? "default.jpg" : file.getOriginalFilename();
-	        user.setProfileImage(imageName);
-	        UserDtls saveUser = userService.saveUser(user);
+        if (existsEmail) {
+            session.setAttribute("errorMsg", "Email already exists");
+        } else {
+            // Assign role based on the user's selection
+            if ("buyer".equals(user.getRole())) {
+                user.setRole("ROLE_USER");
+            } else if ("seller".equals(user.getRole())) {
+                user.setRole("ROLE_ADMIN");
+            }
 
-	        if (!ObjectUtils.isEmpty(saveUser)) {
-	            if (!file.isEmpty()) {
-	                // Use relative path inside static folder
-	                File saveFile = new ClassPathResource("static/img/profile_img").getFile();
+            // Set default image or uploaded image
+            String imageName = file.isEmpty() ? "default.jpg" : file.getOriginalFilename();
+            user.setProfileImage(imageName);
+            UserDtls saveUser = userService.saveUser(user);
 
-	                Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + file.getOriginalFilename());
+            if (!ObjectUtils.isEmpty(saveUser)) {
+                if (!file.isEmpty()) {
+                    // Use relative path inside static folder
+                    File saveFile = new ClassPathResource("static/img/profile_img").getFile();
 
-	                // Copy file to the path
-	                Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-	            }
-	            session.setAttribute("succMsg", "Registered successfully, Please Login!");
-	        } else {
-	            session.setAttribute("errorMsg", "Something went wrong!! Please Try again!");
-	        }
-	    }
+                    Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + file.getOriginalFilename());
 
-	    return "redirect:/signin";
-	}
+                    // Copy file to the path
+                    Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+                }
+                session.setAttribute("succMsg", "Registered successfully, Please Login!");
+            } else {
+                session.setAttribute("errorMsg", "Something went wrong!! Please Try again!");
+            }
+        }
+
+        return "redirect:/signin";
+    }
 
     @GetMapping("/forgot-password")
     public String showForgotPassword() {

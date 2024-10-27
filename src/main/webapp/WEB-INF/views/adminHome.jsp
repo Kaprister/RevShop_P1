@@ -1,5 +1,5 @@
-<%@include file="./base.jsp" %>
 
+<%@include file="./base.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,7 +41,10 @@
         }
     </style>
 </head>
+
 <body class="">
+
+
 
     <div class="flex min-h-screen">
         <!-- Sidebar -->

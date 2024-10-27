@@ -23,4 +23,13 @@ public interface CategoryService {
 
 	public Page<Category> getAllCategorPagination(Integer pageNo,Integer pageSize);
 
+	// Method to get all types (e.g., Male, Female, Kids)
+	public List<String> getAllTypes();
+
+	// Method to get all subCategories based on type or category
+	public List<String> getSubCategoriesByTypeOrCategory(String type, String category);
+
+	// Method to get all available sizes (S, M, L, XL, etc.)
+	public List<String> getAllSizes();
+
 }

@@ -80,8 +80,11 @@
                                 <th class="p-4">Sl No</th>
                                 <th class="p-4">Image</th>
                                 <th class="p-4">Title</th>
+                                <th class="p-4">Type</th>
                                 <th class="p-4">Category</th>
+                                <th class="p-4">Sub-Category</th>
                                 <th class="p-4">Price</th>
+                                <th class="p-4">Size</th>
                                 <th class="p-4">Discount</th>
                                 <th class="p-4">Discount Price</th>
                                 <th class="p-4">Status</th>
@@ -95,8 +98,11 @@
                                     <td class="p-4"><c:out value="${c.index + 1}"/></td>
                                     <td class="p-4"><img src="${pageContext.request.contextPath}/img/product_img/${p.image}" class="w-16 h-16 rounded-md"></td>
                                     <td class="p-4"><c:out value="${p.title}"/></td>
+                                    <td class="p-4"><c:out value="${p.type}"/></td>
                                     <td class="p-4"><c:out value="${p.category}"/></td>
+                                    <td class="p-4"><c:out value="${p.subCategory}"/></td>
                                     <td class="p-4"><c:out value="${p.price}"/></td>
+                                    <td class="p-4"><c:out value="${p.size}"/></td>
                                     <td class="p-4"><c:out value="${p.discount}"/></td>
                                     <td class="p-4"><c:out value="${p.discountPrice}"/></td>
                                     <td class="p-4"><c:out value="${p.isActive}"/></td>

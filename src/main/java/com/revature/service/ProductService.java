@@ -31,5 +31,11 @@ public interface ProductService {
 
 	public Page<Product> searchActiveProductPagination(Integer pageNo, Integer pageSize, String category, String ch);
 
+	public Page<Product> getFilteredActiveProductPagination(Integer pageNo, Integer pageSize,
+															String category, String type, String subCategory, String size);
+
+
+
+
+
 }
- 

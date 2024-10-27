@@ -5,15 +5,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @AllArgsConstructor
 @Getter
 @Setter
 @Entity
+@ToString
 public class Product {
 
 	@Id
@@ -35,100 +33,110 @@ public class Product {
 	private String image;
 
 	private int discount;
-	
+
 	private Double discountPrice;
-	
+
 	private Boolean isActive;
 
-	
-	
+	// New columns added
+	@Column(length = 50)
+	private String type; // male, female, kids
+
+	@Column(length = 100)
+	private String subCategory; // e.g., kurta, sherwani
+
+	@Column(length = 20)
+	private String size; // e.g., S, M, L, XL
+
+
+
 	public Product(Integer id) {
-	    this.id = id;
+		this.id = id;
 	}
 
 
 	public Product() {
 		super();
 	}
-//	
-//	public Integer getId() {
-//		return id;
-//	}
 //
-//	public void setId(Integer id) {
-//		this.id = id;
-//	}
+// public Integer getId() {
+// return id;
+// }
 //
-//	public String getTitle() {
-//		return title;
-//	}
+// public void setId(Integer id) {
+// this.id = id;
+// }
 //
-//	public void setTitle(String title) {
-//		this.title = title;
-//	}
+// public String getTitle() {
+// return title;
+// }
 //
-//	public String getDescription() {
-//		return description;
-//	}
+// public void setTitle(String title) {
+// this.title = title;
+// }
 //
-//	public void setDescription(String description) {
-//		this.description = description;
-//	}
+// public String getDescription() {
+// return description;
+// }
 //
-//	public String getCategory() {
-//		return category;
-//	}
+// public void setDescription(String description) {
+// this.description = description;
+// }
 //
-//	public void setCategory(String category) {
-//		this.category = category;
-//	}
+// public String getCategory() {
+// return category;
+// }
 //
-//	public Double getPrice() {
-//		return price;
-//	}
+// public void setCategory(String category) {
+// this.category = category;
+// }
 //
-//	public void setPrice(Double price) {
-//		this.price = price;
-//	}
+// public Double getPrice() {
+// return price;
+// }
 //
-//	public int getStock() {
-//		return stock;
-//	}
+// public void setPrice(Double price) {
+// this.price = price;
+// }
 //
-//	public void setStock(int stock) {
-//		this.stock = stock;
-//	}
+// public int getStock() {
+// return stock;
+// }
 //
-//	public String getImage() {
-//		return image;
-//	}
+// public void setStock(int stock) {
+// this.stock = stock;
+// }
 //
-//	public void setImage(String image) {
-//		this.image = image;
-//	}
+// public String getImage() {
+// return image;
+// }
 //
-//	public int getDiscount() {
-//		return discount;
-//	}
+// public void setImage(String image) {
+// this.image = image;
+// }
 //
-//	public void setDiscount(int discount) {
-//		this.discount = discount;
-//	}
+// public int getDiscount() {
+// return discount;
+// }
 //
-//	public Double getDiscountPrice() {
-//		return discountPrice;
-//	}
+// public void setDiscount(int discount) {
+// this.discount = discount;
+// }
 //
-//	public void setDiscountPrice(Double discountPrice) {
-//		this.discountPrice = discountPrice;
-//	}
+// public Double getDiscountPrice() {
+// return discountPrice;
+// }
 //
-//	public Boolean getIsActive() {
-//		return isActive;
-//	}
+// public void setDiscountPrice(Double discountPrice) {
+// this.discountPrice = discountPrice;
+// }
 //
-//	public void setIsActive(Boolean isActive) {
-//		this.isActive = isActive;
-//	}
-	
+// public Boolean getIsActive() {
+// return isActive;
+// }
+//
+// public void setIsActive(Boolean isActive) {
+// this.isActive = isActive;
+// }
+
 }

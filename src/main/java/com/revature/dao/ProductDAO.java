@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.repository.Query;
 
 import com.revature.model.Product;
 
@@ -25,6 +27,8 @@ public interface ProductDAO {
 
     // 5. Find all products with pagination
     Page<Product> findAll(Pageable pageable);
+
+    Page<Product> findAll(Specification<Product> spec, Pageable pageable);
 
     // 6. Find active products
     List<Product> findByIsActiveTrue();
@@ -46,7 +50,5 @@ public interface ProductDAO {
 
     // 12. Find active products by title or category with pagination
     Page<Product> findByIsActiveTrueAndTitleContainingIgnoreCaseOrCategoryContainingIgnoreCase(String ch, String ch2, Pageable pageable);
-
-	
 
 }

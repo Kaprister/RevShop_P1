@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.revature.dao.CategoryDAO;
 import com.revature.model.Category;
+import com.revature.model.Product;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -91,6 +92,112 @@ public class CategoryDAOImpl implements CategoryDAO {
         Long count = countQuery.getSingleResult();
 
         return new PageImpl<>(results, pageable, count);
+    }
+
+    // 11. Find Products by Type
+    @Override
+    public List<Product> findByType(String type) {
+        String jpql = "SELECT p FROM Product p WHERE p.type = :type";
+        TypedQuery<Product> query = entityManager.createQuery(jpql, Product.class);
+        query.setParameter("type", type);
+        return query.getResultList();
+    }
+
+    @Override
+    public Page<Product> findByType(Pageable pageable, String type) {
+        String jpql = "SELECT p FROM Product p WHERE p.type = :type";
+        TypedQuery<Product> query = entityManager.createQuery(jpql, Product.class);
+        query.setParameter("type", type);
+        query.setFirstResult((int) pageable.getOffset());
+        query.setMaxResults(pageable.getPageSize());
+        List<Product> results = query.getResultList();
+
+        TypedQuery<Long> countQuery = entityManager.createQuery("SELECT COUNT(p) FROM Product p WHERE p.type = :type", Long.class);
+        countQuery.setParameter("type", type);
+        Long count = countQuery.getSingleResult();
+        return new PageImpl<>(results, pageable, count);
+    }
+
+    // 12. Find Products by Type and Category
+    @Override
+    public List<Product> findByTypeAndCategory(String type, String category) {
+        String jpql = "SELECT p FROM Product p WHERE p.type = :type AND p.category = :category";
+        TypedQuery<Product> query = entityManager.createQuery(jpql, Product.class);
+        query.setParameter("type", type);
+        query.setParameter("category", category);
+        return query.getResultList();
+    }
+
+    // 13. Find Products by SubCategory
+    @Override
+    public List<Product> findBySubCategory(String subCategory) {
+        String jpql = "SELECT p FROM Product p WHERE p.subCategory = :subCategory";
+        TypedQuery<Product> query = entityManager.createQuery(jpql, Product.class);
+        query.setParameter("subCategory", subCategory);
+        return query.getResultList();
+    }
+
+    @Override
+    public Page<Product> findBySubCategory(Pageable pageable, String subCategory) {
+        String jpql = "SELECT p FROM Product p WHERE p.subCategory = :subCategory";
+        TypedQuery<Product> query = entityManager.createQuery(jpql, Product.class);
+        query.setParameter("subCategory", subCategory);
+        query.setFirstResult((int) pageable.getOffset());
+        query.setMaxResults(pageable.getPageSize());
+        List<Product> results = query.getResultList();
+
+        TypedQuery<Long> countQuery = entityManager.createQuery("SELECT COUNT(p) FROM Product p WHERE p.subCategory = :subCategory", Long.class);
+        countQuery.setParameter("subCategory", subCategory);
+        Long count = countQuery.getSingleResult();
+        return new PageImpl<>(results, pageable, count);
+    }
+
+    // 14. Find Products by Size
+    @Override
+    public List<Product> findBySize(String size) {
+        String jpql = "SELECT p FROM Product p WHERE p.size = :size";
+        TypedQuery<Product> query = entityManager.createQuery(jpql, Product.class);
+        query.setParameter("size", size);
+        return query.getResultList();
+    }
+
+    @Override
+    public Page<Product> findBySize(Pageable pageable, String size) {
+        String jpql = "SELECT p FROM Product p WHERE p.size = :size";
+        TypedQuery<Product> query = entityManager.createQuery(jpql, Product.class);
+        query.setParameter("size", size);
+        query.setFirstResult((int) pageable.getOffset());
+        query.setMaxResults(pageable.getPageSize());
+        List<Product> results = query.getResultList();
+
+        TypedQuery<Long> countQuery = entityManager.createQuery("SELECT COUNT(p) FROM Product p WHERE p.size = :size", Long.class);
+        countQuery.setParameter("size", size);
+        Long count = countQuery.getSingleResult();
+        return new PageImpl<>(results, pageable, count);
+    }
+
+    // New methods to retrieve all types, subcategories, and sizes
+    @Override
+    public List<String> findAllTypes() {
+        String jpql = "SELECT DISTINCT p.type FROM Product p"; // Adjust based on your model
+        TypedQuery<String> query = entityManager.createQuery(jpql, String.class);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<String> findSubCategoriesByTypeOrCategory(String type, String category) {
+        String jpql = "SELECT DISTINCT p.subCategory FROM Product p WHERE p.type = :type OR p.category = :category"; // Adjust based on your model
+        TypedQuery<String> query = entityManager.createQuery(jpql, String.class);
+        query.setParameter("type", type);
+        query.setParameter("category", category);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<String> findAllSizes() {
+        String jpql = "SELECT DISTINCT p.size FROM Product p"; // Adjust based on your model
+        TypedQuery<String> query = entityManager.createQuery(jpql, String.class);
+        return query.getResultList();
     }
 
 }

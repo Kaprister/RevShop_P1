@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="ISO-8859-1">
-    <title>RevShop</title>
+    <title>Product Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* Product card styling */
@@ -12,8 +12,10 @@
             position: relative;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
             border-radius: 15px;
-            padding: 20px;
+            height: 400px;
+            padding: 15px;
             background-color: #fff;
+            overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
@@ -42,6 +44,8 @@
 
         /* Product image */
         .product-card img {
+        	object-fit:cover,
+        	height: auto,
             max-width: 150px;
             margin: 0 auto;
             transition: transform 0.3s ease;
@@ -50,7 +54,9 @@
         .product-card img:hover {
             transform: scale(1.05);
         }
-
+		.product-details{
+		margin-top: 10px;
+		}
         /* Product details */
         .product-details p {
             margin: 0;
@@ -98,7 +104,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 60%; /* Increased width for better visibility */
+            width: 60%;
             margin: 0 auto;
         }
 
@@ -122,6 +128,26 @@
             color: #333;
         }
 
+        .size-container {
+        background-color: #f8f9fa;
+            padding: 20px;
+	    }
+
+	    .size-link {
+	        padding: 10px;
+	        margin-bottom: 10px;
+	        border-radius: 8px;
+	        display: inline-block;
+	        text-decoration: none;
+	        color: black; /* default text color */
+	    }
+
+	    .size-link:hover {
+	        background-color: #007bff; /* blue on hover */
+	        color: white; /* white text on hover */
+	        text-decoration: none;
+	    }
+
         .btn-search {
             background-color: #007bff;
             color: white;
@@ -144,8 +170,8 @@
             border-radius: 50px;
             margin: 0 5px;
             background-color: #007bff;
-            font-size : 20px;
-            text-decoration : none;
+            font-size: 20px;
+            text-decoration: none;
             color: #fff;
             transition: background-color 0.3s ease;
         }
@@ -170,6 +196,23 @@
                 justify-content: center;
             }
         }
+
+        .product-image-container {
+    width: 100%; /* Adjust to match the width of the card */
+    height: 200px; /* Fixed height for the image container */
+    display: flex;
+    justify-content: center; /* Center the image horizontally */
+    align-items: center; /* Center the image vertically */
+    overflow: hidden; /* Hide overflow if the image is larger than the container */
+    border-radius: 10px; /* Optional: Same border radius as the card for a rounded effect */
+    background-color: #f5f5f5; /* Optional: Background color for when the image loads */
+}
+
+.product-image-container img {
+    max-width: 100%; /* Ensure the image fits the width of the container */
+    max-height: 100%; /* Ensure the image fits the height of the container */
+    object-fit: cover; /* Maintain aspect ratio while covering the container */
+}
     </style>
 </head>
 <body>
@@ -203,15 +246,67 @@
         <div class="container-fluid mt-4">
             <div class="row">
                 <!-- Category Sidebar -->
-                <div class="col-md-2">
-                    <div class="category-sidebar">
-                        <p class="fs-5">Categories</p>
-                        <a href="/products" class="${paramValue == '' ? 'active' : ''}">All</a>
-                        <c:forEach var="c" items="${categories}">
-                            <a href="/products?category=${c.name}" class="${paramValue == c.name ? 'active' : ''}">${c.name}</a>
-                        </c:forEach>
-                    </div>
-                </div>
+               <!-- Category Sidebar -->
+			<div class="col-md-2">
+			    <div class="category-sidebar">
+			        <p class="fs-5">Types</p>
+			        <!-- Highlight "All" by default -->
+			        <a href="/products"
+			        style="${empty param.type ? 'background-color:#007bff;color:white;padding:10px;margin-right:10px;border-radius:8px;' : 'padding:10px;margin-right:10px;border-radius:8px;'}"
+			        class="${empty param.type ? 'active' : ''}">All</a>
+			        <a href="/products?type=male" style="${param.type == 'male' ? 'background-color:#007bff;color:white;padding:10px;margin-right:10px;border-radius:8px;' : 'padding:10px;margin-right:10px;border-radius:8px;'}" class="${param.type == 'male' ? 'active' : ''}">Male</a>
+			        <a href="/products?type=female" style="${param.type == 'female' ? 'background-color:#007bff;color:white;padding:10px;margin-right:10px;border-radius:8px;' : 'padding:10px;margin-right:10px;border-radius:8px;'}" class="${param.type == 'female' ? 'active' : ''}">Female</a>
+			        <a href="/products?type=kids" style="${param.type == 'kids' ? 'background-color:#007bff;color:white;padding:10px;margin-right:10px;border-radius:8px;' : 'padding:10px;margin-right:10px;border-radius:8px;'}" class="${param.type == 'kids' ? 'active' : ''}">Kids</a>
+			    </div>
+
+			<div class="category-sidebar">
+			<c:if test="${not empty categories}">
+			        <p class="fs-5 mt-4">Categories</p>
+			        <c:forEach var="c" items="${categories}">
+			            <a href="/products?type=${param.type}&category=${c.name}" class="${param.category == c.name ? 'active' : ''}">${c.name}</a>
+			        </c:forEach>
+			    </c:if></div>
+
+
+
+			       <!-- Sizes Filter -->
+<div class="size-container">
+			        <p class="fs-5">Sizes</p>
+
+				    <div>
+				        <a href="/products?type=${param.type}&category=${param.category}&size=S"
+				           style="${param.size == 'S' ? 'background-color:#007bff;color:white;' : ''}"
+				           class="size-link ${param.size == 'S' ? 'active' : ''}">S</a>
+				    </div>
+
+				    <div>
+				        <a href="/products?type=${param.type}&category=${param.category}&size=M"
+				           style="${param.size == 'M' ? 'background-color:#007bff;color:white;' : ''}"
+				           class="size-link ${param.size == 'M' ? 'active' : ''}">M</a>
+				    </div>
+
+				    <div>
+				        <a href="/products?type=${param.type}&category=${param.category}&size=L"
+				           style="${param.size == 'L' ? 'background-color:#007bff;color:white;' : ''}"
+				           class="size-link ${param.size == 'L' ? 'active' : ''}">L</a>
+				    </div>
+
+				    <div>
+				        <a href="/products?type=${param.type}&category=${param.category}&size=XL"
+				           style="${param.size == 'XL' ? 'background-color:#007bff;color:white;' : ''}"
+				           class="size-link ${param.size == 'XL' ? 'active' : ''}">XL</a>
+				    </div>
+
+				    <div>
+				        <a href="/products?type=${param.type}&category=${param.category}&size=XXL"
+				           style="${param.size == 'XXL' ? 'background-color:#007bff;color:white;' : ''}"
+				           class="size-link ${param.size == 'XXL' ? 'active' : ''}">XXL</a>
+				    </div>
+				</div>
+
+
+			</div>
+
 
                 <!-- Products Section -->
                 <div class="col-md-10">
@@ -229,7 +324,9 @@
                                             <a href="/user/addWishlist?productId=${p.id}" class="wishlist-heart" onclick="toggleWishlist(this)">
                                                 <i class="fas fa-heart"></i>
                                             </a>
+                                            <div class = "product-image-container">
                                             <img src="/img/product_img/${p.image}" alt="${p.title}">
+                                            </div>
                                             <div class="product-details">
                                                 <p class="fs-5">${p.title}</p>
                                                 <p>&#8377; ${p.discountPrice} <br>
@@ -247,31 +344,30 @@
 
                     <!-- Pagination -->
                     <div class="pagination-container mt-4 d-flex justify-content-center">
-                        <ul class="pagination">
-                            <li class="${isFirst ? 'disabled' : ''}">
-                                <a href="/products?pageNo=${pageNo - 1}">&#9666;</a>
-                            </li>
-                            <c:forEach var="i" begin="1" end="${totalPages}">
-                                <li class="${pageNo + 1 == i ? 'active' : ''}">
-                                    <a href="/products?pageNo=${i - 1}">${i}</a>
-                                </li>
-                            </c:forEach>
-                            <li class="${isLast ? 'disabled' : ''}">
-                                <a href="/products?pageNo=${pageNo + 1}">&#9656;</a>
-                            </li>
-                        </ul>
+                        <c:if test="${not empty pageNumbers}">
+                            <div class="pagination">
+                                <c:forEach var="page" items="${pageNumbers}">
+                                    <c:choose>
+                                        <c:when test="${page == currentPage}">
+                                            <span class="active">${page}</span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a href="/products?page=${page}" class="page-link">${page}</a>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                            </div>
+                        </c:if>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <jsp:include page="footer.jsp" />
+
     <script>
         function toggleWishlist(element) {
-            element.classList.toggle("active");
+            element.classList.toggle('active');
         }
     </script>
-
-
 </body>
 </html>

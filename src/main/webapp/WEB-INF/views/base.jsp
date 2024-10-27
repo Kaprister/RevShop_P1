@@ -122,9 +122,9 @@
                             <li class="nav-item">
                                 <a class=" btn btn-primary me-2" href="/signin">LOGIN</a>
                             </li>
-                            <li class="nav-item">
+                            <%--<li class="nav-item">
                                 <a class=" btn btn-primary me-2" href="/register">REGISTER</a>
-                            </li>
+                            </li>--%>
                         </c:when>
                         <c:otherwise>
                             <c:if test="${user.role == 'ROLE_USER'}">

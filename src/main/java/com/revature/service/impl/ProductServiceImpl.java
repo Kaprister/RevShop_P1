@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +13,18 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.revature.dao.ProductDAO;
 import com.revature.model.Product;
+import com.revature.repository.ProductRepository;
 import com.revature.service.ProductService;
+
+import jakarta.persistence.criteria.Predicate;
 
 
 @Service
@@ -76,7 +82,7 @@ public class ProductServiceImpl implements ProductService {
 		dbProduct.setIsActive(product.getIsActive());
 		dbProduct.setDiscount(product.getDiscount());
 
-		// 5=100*(5/100); 100-5=95
+// 5=100*(5/100); 100-5=95
 		Double disocunt = product.getPrice() * (product.getDiscount() / 100.0);
 		Double discountPrice = product.getPrice() - disocunt;
 		dbProduct.setDiscountPrice(discountPrice);
@@ -113,7 +119,7 @@ public class ProductServiceImpl implements ProductService {
 		}
 
 		return products;
-	} 
+	}
 
 	@Override
 	public List<Product> searchProduct(String ch) {
@@ -152,7 +158,39 @@ public class ProductServiceImpl implements ProductService {
 		return pageProduct;
 	}
 
-
+	@Override
+	public Page<Product> getFilteredActiveProductPagination(Integer pageNo, Integer pageSize,
+															String category, String type, String subCategory, String size) {
+		Pageable pageable = PageRequest.of(pageNo, pageSize);
+		Specification<Product> spec = createProductSpecification(category, type, subCategory, size);
+		return productRepository.findAll(spec, pageable); // Make sure you're using the correct repository
 	}
 
-  
+
+	private Specification<Product> createProductSpecification(String category, String type, String subCategory, String size) {
+		return (root, query, criteriaBuilder) -> {
+			List<Predicate> predicates = new ArrayList<>();
+
+			if (!StringUtils.isEmpty(category)) {
+				predicates.add(criteriaBuilder.equal(root.get("category"), category));
+			}
+
+			if (!StringUtils.isEmpty(type)) {
+				predicates.add(criteriaBuilder.equal(root.get("type"), type));
+			}
+
+			if (!StringUtils.isEmpty(subCategory)) {
+				predicates.add(criteriaBuilder.equal(root.get("subCategory"), subCategory));
+			}
+
+			if (!StringUtils.isEmpty(size)) {
+				predicates.add(criteriaBuilder.equal(root.get("size"), size));
+			}
+
+			return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+		};
+	}
+
+
+
+}

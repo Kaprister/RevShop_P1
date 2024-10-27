@@ -21,33 +21,10 @@
             position: relative;
         }
 
-        /*.overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1;
-            margin-top: -89px;
-        }*/
-
-        /* Modernized DIV Container inside SECTION */
         section .container {
             background: rgba(255, 255, 255, 0.15);
             padding: 2rem;
-            /*border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            */
         }
-        /*
-        section .container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-        */
 
         .card {
             color : rgba(255, 255, 255, 0.2);
@@ -61,7 +38,6 @@
         }
 
         .card:hover {
-            /*transform: scale(0.5);*/
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
@@ -114,18 +90,15 @@
 
         .btn-primary:hover {
             background-color: #574bfc;
-            /*transform: scale(1);*/
         }
-
-
 
         .text-success, .text-danger {
             font-weight: bold;
         }
-        .form-check-label{
-          font-size: 1.5rem;
-          color: black;
-        
+
+        .form-check-label {
+            font-size: 1.5rem;
+            color: black;
         }
 
         /* Responsive Styles */
@@ -137,9 +110,6 @@
     </style>
 </head>
 <body>
-    <!-- Dark Overlay -->
-    <div class="overlay"></div>
-
     <!-- Add Product Form -->
     <section>
         <div class="container p-5 mt-3">
@@ -195,6 +165,40 @@
                                     <input type="number" name="price" class="form-control" required>
                                 </div>
 
+                                <!-- New fields from page 1 -->
+
+                                <div class="mb-3">
+                                    <label class="form-label">Type</label>
+                                    <select class="form-select" name="type" required>
+                                        <option value="">-- Select Type --</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="kids">Kids</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Sub-Category</label>
+                                    <select class="form-select" name="subCategory" required>
+                                        <option value="">-- Select Sub-Category --</option>
+                                        <option value="kurta">Kurta</option>
+                                        <option value="sherwani">Sherwani</option>
+                                        <option value="tshirt">T-Shirt</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Size</label>
+                                    <select class="form-select" name="size" required>
+                                        <option value="">-- Select Size --</option>
+                                        <option value="S">S</option>
+                                        <option value="M">M</option>
+                                        <option value="L">L</option>
+                                        <option value="XL">XL</option>
+                                        <option value="XXL">XXL</option>
+                                    </select>
+                                </div>
+
                                 <div class="mb-3">
                                     <label class="form-label">Status</label>
                                     <div class="form-check form-check-inline">
@@ -237,16 +241,20 @@
         if (successAlert) {
             successAlert.style.transition = "opacity 0.5s ease-out";
             successAlert.style.opacity = "0";
-            setTimeout(() => successAlert.style.display = "none", 500);
+            setTimeout(function() {
+                successAlert.remove();
+            }, 500);
         }
 
         const errorAlert = document.getElementById("error-alert");
         if (errorAlert) {
             errorAlert.style.transition = "opacity 0.5s ease-out";
             errorAlert.style.opacity = "0";
-            setTimeout(() => errorAlert.style.display = "none", 500);
+            setTimeout(function() {
+                errorAlert.remove();
+            }, 500);
         }
-    }, 2000);  // 2000ms = 2 seconds
-</script>
+    }, 2000);
+    </script>
 </body>
 </html>

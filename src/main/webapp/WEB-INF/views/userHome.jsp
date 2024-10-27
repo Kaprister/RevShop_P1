@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="./base.jsp" %>
+<%@ include file="./billboard.jsp" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +13,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
     <style>
         /* Carousel image settings */
 .carousel-inner img {
@@ -160,31 +163,39 @@ height: auto; /* Adjusted height for product images */
 <body>
     <section>
         <!-- Start Slider -->
-        <%@ include file="hero.jsp" %>
-        <%@ include file="banner.jsp" %>
+
         <!-- end of carousel -->
 
         <!-- Start Category Module -->
-        <div class="container my-5">
-            <div class="row text-center">
-                <p class="fs-4 mb-4">Category</p>
-                <div class="category-container d-flex justify-content-center">
-                    <c:forEach var="category" items="${categories}">
-                        <div class="col-md-2 col-sm-4 mb-4">
-                            <div class="card rounded-circle shadow-sm">
-                                <div class="product-image-container">
-                                    <img src="${pageContext.request.contextPath}/img/category_img/${category.imageName}" class="img-fluid" alt="${category.name}">
-                                </div>
-                                <div class="card-body text-center">
-                                    <a href="${pageContext.request.contextPath}/products?category=${category.name}" class="d-block mt-2">${category.name}</a>
-                                </div>
-                            </div>
-                        </div>
-                    </c:forEach>
-                </div>
-            </div>
-        </div>
+      <div class="container mx-auto my-5">
+          <div class="text-center mb-8">
+              <p class="text-3xl font-semibold">Category</p>
+          </div>
+          <div class="flex flex-wrap justify-center">
+              <c:forEach var="category" items="${categories}">
+                  <div class="w-1/4 sm:w-1/3 lg:w-1/6 p-4">
+                      <div class="bg-white rounded-full shadow-lg transition-transform transform hover:scale-105">
+                          <div class="relative">
+                              <img src="${pageContext.request.contextPath}/img/category_img/${category.imageName}"
+                                   class="w-full h-auto rounded-full object-cover"
+                                   alt="${category.name}">
+                          </div>
+                          <div class="p-4 text-center">
+                              <a href="${pageContext.request.contextPath}/products?category=${category.name}"
+                                 class="text-lg font-medium text-gray-800 hover:text-blue-500 transition duration-300">
+                                 ${category.name}
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+              </c:forEach>
+          </div>
+      </div>
+
         <!-- End Category Module -->
+        <%@ include file="hero.jsp" %>
+
+        <%@ include file="banner.jsp" %>
 <!-- Start Latest Product Module -->
 
 <!-- End Latest Product Module -->
