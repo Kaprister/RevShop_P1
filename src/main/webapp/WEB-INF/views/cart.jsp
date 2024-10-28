@@ -237,10 +237,18 @@ th, td {
                                     <td class="text-center">
                                         <a href="${pageContext.request.contextPath}/user/cartQuantityUpdate?sy=de&cid=${cart.id}" class="btn btn-warning">
                                             <i class="fa-solid fa-minus"></i>
-                                        </a> [ ${cart.quantity} ] 
+                                        </a>
+                                        [ ${cart.quantity} ]
                                         <a href="${pageContext.request.contextPath}/user/cartQuantityUpdate?sy=in&cid=${cart.id}" class="btn btn-warning">
                                             <i class="fa-solid fa-plus"></i>
                                         </a>
+
+                                        <!-- Display message if quantity exceeds 5 -->
+                                        <c:if test="${cart.quantity >= 5}">
+                                            <div class="text-danger mt-2 text-sm">
+                                                Not enough quantity available
+                                            </div>
+                                        </c:if>
                                     </td>
                                     <td>&#8377; ${cart.totalPrice}</td>
                                 </tr>
@@ -251,6 +259,7 @@ th, td {
                                 <td class="fw-bold">&#8377; ${totalOrderPrice}</td>
                             </tr>
                         </tbody>
+
                     </table>
                     <div class="text-center">
                         <a href="${pageContext.request.contextPath}/user/orders" class="btn btn-warning">Proceed Payment</a>
@@ -259,5 +268,5 @@ th, td {
             </div>
         </div>
     </section>
-</body> 
+</body>
 </html>

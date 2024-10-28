@@ -86,7 +86,7 @@ public class CartServiceImpl implements CartService {
 		if (sy.equalsIgnoreCase("de")) {
 			updateQuantity = cart.getQuantity() - 1;
 
-			if (updateQuantity < 0) {
+			if (updateQuantity < 1) {
 				cartRepository.delete(cart);
 			} else {
 				cart.setQuantity(updateQuantity);

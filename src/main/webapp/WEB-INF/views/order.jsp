@@ -8,114 +8,107 @@
     <title>RevShop</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-    <style>
-        /* Include the enhanced CSS here */
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
-        }
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f4f7fa;
+        color: #4a5568;
+    }
 
-        .container {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+    .container {
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        max-width: 900px;
+        margin: auto;
+    }
 
-        p {
-            font-weight: bold;
-            color: #444;
-        }
+    p.fs-4 {
+        font-size: 1.75rem;
+        color: #1a202c;
+        font-weight: 600;
+        text-align: center;
+    }
 
-        label {
-            font-weight: 500;
-            color: #555;
-        }
+    label {
+        font-size: 0.875rem;
+        color: #4a5568;
+        font-weight: 500;
+    }
 
-        input, select {
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            padding: 10px;
-            font-size: 14px;
-        }
+    input, select {
+        width: 100%;
+        padding: 0.75rem;
+        margin-top: 0.5rem;
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+        background-color: #f7fafc;
+    }
 
-        input:focus, select:focus {
-            outline: none;
-            border-color: #007bff;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
-        }
+    input:focus, select:focus {
+        outline: none;
+        border-color: #3182ce;
+        box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.4);
+        background-color: #ffffff;
+    }
 
-        .btn {
-            padding: 12px 16px;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
-        }
+    .btn {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+    }
 
-        .bg-primary {
-            background-color: #007bff !important;
-        }
+    .bg-primary {
+        background-color: #3182ce;
+        color: white;
+    }
 
-        .bg-primary:hover {
-            background-color: #0056b3 !important;
-        }
+    .bg-primary:hover {
+        background-color: #2b6cb0;
+    }
 
+    .table-borderless td {
+        padding: 0.75rem;
+        color: #2d3748;
+    }
+
+    .table-borderless tr.border-top td {
+        border-top: 2px solid #3182ce;
+        font-weight: 700;
+        font-size: 1.125rem;
+    }
+
+    .card {
+        border: none;
+        background-color: #edf2f7;
+        border-radius: 8px;
+    }
+
+    .card-body {
+        padding: 1.5rem;
+        background-color: white;
+        border-radius: 8px;
+        transition: box-shadow 0.3s ease;
+    }
+
+    .card-body:hover {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: 768px) {
         .col-md-6 {
-            margin-bottom: 20px;
+            width: 100%;
+            margin-bottom: 1.5rem;
         }
+    }
+</style>
 
-        .fs-4 {
-            font-size: 1.5rem;
-            color: #007bff;
-        }
-
-        .table-borderless td {
-            padding: 10px;
-            font-size: 14px;
-        }
-
-        .table-borderless tr.border-top td {
-            border-top: 2px solid #007bff;
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        .card {
-            border: none;
-            background-color: #f7f7f7;
-        }
-
-        .card-body {
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-        }
-
-        .card-body:hover {
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        input.form-control, select.form-control {
-            box-shadow: none;
-            border: 1px solid #ccc;
-            transition: border-color 0.3s;
-        }
-
-        input.form-control:focus, select.form-control:focus {
-            border-color: #007bff;
-        }
-
-        @media (max-width: 768px) {
-            .col-md-6 {
-                flex: 100%;
-                max-width: 100%;
-            }
-
-            .p-1 {
-                padding: 5px !important;
-            }
-        }
-    </style>
 </head>
 <body>
     <section>
